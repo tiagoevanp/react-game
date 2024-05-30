@@ -1,5 +1,5 @@
 import { useSetting } from '@evanbrother/providers';
-import { AnimatedText, Application, Button, PlainText } from '@evanbrother/ui';
+import { AnimatedText, Application, Button } from '@evanbrother/ui';
 
 const App = () => {
     const [theme, setTheme] = useSetting('theme');
@@ -11,12 +11,6 @@ const App = () => {
             >
                 Change Theme
             </Button>
-            <PlainText>
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                Tenetur ullam omnis quibusdam est voluptate dicta officiis
-                voluptatibus, neque, quis magni expedita cumque odit, nihil
-                illum adipisci blanditiis inventore amet? Adipisci!
-            </PlainText>
             <AnimatedText>
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                 Tenetur ullam omnis quibusdam est voluptate dicta officiis

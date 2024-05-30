@@ -3,6 +3,7 @@
   "private": true,
   "scripts": {
     "dev": "bun run --filter='@evanbrother/main' dev",
+    "lint": "bun run --filter='*' lint",
     "test": "bun run --filter='*' test"
   },
   "workspaces": [

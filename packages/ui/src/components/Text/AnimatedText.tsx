@@ -1,9 +1,10 @@
-import { PropsWithChildren } from 'react';
-
 import { _Text, _TextProps } from './Text';
+import { useTypewriterAnimation } from './hooks/useTypewriterAnimation';
 
-type AnimatedTextProps = PropsWithChildren<_TextProps>;
+type AnimatedTextProps = _TextProps & { children: string };
 
 export const AnimatedText = ({ children, scale }: AnimatedTextProps) => {
-    return <_Text scale={scale}>{children}</_Text>;
+    const text = useTypewriterAnimation({ text: children });
+
+    return <_Text scale={scale}>{text}</_Text>;
 };
