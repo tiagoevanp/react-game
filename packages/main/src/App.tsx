@@ -11,7 +11,7 @@ const App = () => {
             >
                 Change Theme
             </Button>
-            <AnimatedText>
+            <AnimatedText scale="h1" time={128}>
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit.
                 Tenetur ullam omnis quibusdam est voluptate dicta officiis
                 voluptatibus, neque, quis magni expedita cumque odit, nihil

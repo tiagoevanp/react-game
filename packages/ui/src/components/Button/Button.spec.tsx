@@ -4,7 +4,7 @@ import { test, expect } from 'bun:test';
 import { Button } from '.';
 
 test('Button', () => {
-    render(<Button text="something" />);
+    render(<Button onClick={() => {}}>{'something'}</Button>);
 
     expect(screen.getByRole('button').textContent).toBe('something');
 });

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 
-type OptionProps = {
+export type UseTypewriterOptionProps = {
     text: string;
     time?: 2 | 4 | 8 | 16 | 32 | 64 | 128 | 256;
     onType?: (text?: string) => void;
@@ -10,7 +10,7 @@ export const useTypewriterAnimation = ({
     text: originalText,
     time = 32,
     onType,
-}: OptionProps) => {
+}: UseTypewriterOptionProps) => {
     const [text, setText] = useState('');
     const [length, setLength] = useState(0);
     const max = useMemo(() => time + time * 0.5, [time]);

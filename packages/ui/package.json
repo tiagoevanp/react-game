@@ -11,13 +11,14 @@
     "test": "bun test"
   },
   "dependencies": {
+    "@evanbrother/parser": "workspace: *",
     "@emotion/react": "^11.11.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@emotion/eslint-plugin": "^11.11.0",
-    "@evanbrother/eslint-config": "workspace:*",
+    "@evanbrother/eslint-config": "workspace: *",
     "@happy-dom/global-registrator": "^14.11.0",
     "@testing-library/dom": "^10.1.0",
     "@testing-library/react": "^15.0.7",

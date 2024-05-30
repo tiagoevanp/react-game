@@ -8,4 +8,14 @@ body {
     margin: 0;
     padding: 0;
     font-family: FreePixel, Courier, sans-serif;
+    /* image-rendering: pixelated;
+    zoom: 3 */
+}
+
+:root {
+    --theme-smooth-animtation-time: 200ms;
+}
+
+.theme-smooth-transition {
+    transition: background-color var(--theme-smooth-animtation-time) ease-in-out, color var(--theme-smooth-animtation-time) ease-in-out;
 }

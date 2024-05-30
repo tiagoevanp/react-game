@@ -14,6 +14,7 @@ export const Application = ({ children }: PropsWithChildren) => {
     return (
         <div
             css={style}
+            className="theme-smooth-transition"
             style={{ backgroundColor: theme.application.background }}
         >
             {children}
