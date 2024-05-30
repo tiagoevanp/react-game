@@ -3,7 +3,7 @@ module.exports = {
   plugins: ["stylelint-prettier"],
   overrides: [
     {
-      files: ["*.tsx"],
+      files: ["*.tsx", "*.ts"],
       customSyntax: "postcss-styled-syntax",
     },
   ],

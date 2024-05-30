@@ -10,6 +10,6 @@ module.exports = {
   parser: "@typescript-eslint/parser",
   plugins: ["@typescript-eslint"],
   rules: {
-    indent: ["error", 4],
+    indent: ["error", 4, { SwitchCase: 1 }],
   },
 };
