@@ -7,11 +7,13 @@ import {
 } from 'react';
 
 import { SettingsContext } from './SettingsProvider';
-import { light, dark } from '../themes';
-import type { EvanBrotherTheme } from '../themes';
+import { light, dark } from '@evanbrother/ui/themes';
+import type { EvanBrotherTheme } from '@evanbrother/ui/themes';
 
 export const ThemeProvider = ({ children }: PropsWithChildren) => {
-    const { theme: settingTheme } = useContext(SettingsContext);
+    const {
+        settings: { theme: settingTheme },
+    } = useContext(SettingsContext);
     const [theme, setTheme] = useState<EvanBrotherTheme>(light);
 
     useLayoutEffect(() => {

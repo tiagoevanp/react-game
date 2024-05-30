@@ -1,18 +1,17 @@
 {
-  "name": "@evanbrother/main",
+  "name": "@evanbrother/providers",
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
     "build": "tsc && vite build",
-    "lint": "eslint .",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
   "dependencies": {
-    "@evanbrother/providers": "workspace: *",
     "@evanbrother/ui": "workspace: *",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-use-localstorage": "^3.5.3"
   },
   "devDependencies": {
     "@evanbrother/eslint-config": "workspace: *",
@@ -20,6 +19,7 @@
     "@types/react-dom": "^18.2.22",
     "@vitejs/plugin-react": "^4.2.1",
     "typescript": "^5.2.2",
+    "prettier": "3.2.5",
     "vite": "^5.2.0"
   },
   "prettier": "@evanbrother/prettier-config"

@@ -6,7 +6,7 @@ export const Application = ({ children }: PropsWithChildren) => {
 
     const style = css`
         display: flex;
-        padding: 10px;
+        flex-direction: column;
         width: 100vw;
         height: 100vh;
     `;

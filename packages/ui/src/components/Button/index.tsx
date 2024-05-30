@@ -1,7 +1,13 @@
-import { PropsWithChildren } from 'react';
+import { MouseEventHandler, PropsWithChildren } from 'react';
 
-type ButtonProps = PropsWithChildren;
+type ButtonProps = PropsWithChildren<{
+    onClick: MouseEventHandler<HTMLButtonElement>;
+}>;
 
-export const Button = ({ children }: ButtonProps) => {
-    return <button type="button">{children}</button>;
+export const Button = ({ children, onClick }: ButtonProps) => {
+    return (
+        <button type="button" onClick={onClick}>
+            {children}
+        </button>
+    );
 };

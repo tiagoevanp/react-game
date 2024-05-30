@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { SettingsProvider, ThemeProvider } from '@evanbrother/ui';
+import { SettingsProvider, ThemeProvider } from '@evanbrother/providers';
 
 import App from './App.tsx';
 
