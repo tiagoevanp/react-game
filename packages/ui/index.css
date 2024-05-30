@@ -1,0 +1,8 @@
+@font-face {
+    font-family: FreePixel;
+    src: url('./assets/fonts/FreePixel.ttf');
+}
+
+p {
+    font-family: FreePixel, Courier, sans-serif;
+}
