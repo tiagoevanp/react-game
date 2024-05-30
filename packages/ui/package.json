@@ -6,17 +6,18 @@
     "build": "tsc && vite build",
     "lint": "bun run _eslint & bun run _stylelint",
     "_eslint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "_stylelint": "stylelint '**/*.css'",
+    "_stylelint": "stylelint '**/*.{css,tsx}'",
     "preview": "vite preview",
     "test": "bun test"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@emotion/eslint-plugin": "^11.11.0",
     "@evanbrother/eslint-config": "workspace:*",
-    "@evanbrother/stylelint-config": "workspace:*",
     "@happy-dom/global-registrator": "^14.11.0",
     "@testing-library/dom": "^10.1.0",
     "@testing-library/react": "^15.0.7",

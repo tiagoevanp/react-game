@@ -1,5 +1,4 @@
 import { PropsWithChildren } from 'react';
-import './Button.css';
 
 type ButtonProps = PropsWithChildren;
 

@@ -1,0 +1,4 @@
+{
+  "stylelint.validate": ["typescriptreact", "css"],
+  "stylelint.customSyntax": "postcss-styled-syntax"
+}
