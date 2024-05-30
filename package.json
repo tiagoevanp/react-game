@@ -1,0 +1,11 @@
+{
+  "name": "bun-test",
+  "private": true,
+  "scripts": {
+    "dev": "bun run --filter='main' dev",
+    "test": "bun run --filter='*' test"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}

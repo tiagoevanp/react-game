@@ -1,0 +1,14 @@
+{
+  "name": "@evanbrother/config-eslint",
+  "version": "0.0.0",
+  "type": "commonjs",
+  "main": "index.js",
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "typescript-eslint": "^7.10.0"
+  },
+  "peerDependencies": {
+    "eslint-config-prettier": "*"
+  }
+}
