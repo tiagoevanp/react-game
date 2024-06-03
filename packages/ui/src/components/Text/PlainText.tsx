@@ -4,6 +4,10 @@ import { _Text, _TextProps } from './Text';
 
 type PlainTextProps = PropsWithChildren<_TextProps>;
 
-export const PlainText = ({ children, scale }: PlainTextProps) => {
-    return <_Text scale={scale}>{children}</_Text>;
+export const PlainText = ({ children, scale, markup }: PlainTextProps) => {
+    return (
+        <_Text scale={scale} markup={markup}>
+            {children}
+        </_Text>
+    );
 };
