@@ -11,10 +11,11 @@
     "test": "bun test"
   },
   "dependencies": {
-    "@evanbrother/parser": "workspace: *",
     "@emotion/react": "^11.11.4",
+    "@evanbrother/parser": "workspace: *",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-error-boundary": "^4.0.13"
   },
   "devDependencies": {
     "@emotion/eslint-plugin": "^11.11.0",

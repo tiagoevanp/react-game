@@ -11,5 +11,6 @@ export interface EvanBrotherTheme {
         h3: string;
         h4: string;
         p: string;
+        error: string;
     };
 }
