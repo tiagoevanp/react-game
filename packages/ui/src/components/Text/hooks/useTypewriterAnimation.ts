@@ -1,30 +1,56 @@
 import { useEffect, useMemo, useState } from 'react';
 
 export type UseTypewriterOptionProps = {
-    text: string;
     time?: 2 | 4 | 8 | 16 | 32 | 64 | 128 | 256;
     onType?: (text?: string) => void;
 };
 
-export const useTypewriterAnimation = ({
-    text: originalText,
-    time = 32,
-    onType,
-}: UseTypewriterOptionProps) => {
+export const useTypewriterAnimation = (
+    originalText: string,
+    { time = 32, onType }: UseTypewriterOptionProps
+) => {
     const [text, setText] = useState('');
-    const [length, setLength] = useState(0);
+    const [cursor, setCursor] = useState(0);
+    const [tags, setTags] = useState<string[]>([]);
     const max = useMemo(() => time + time * 0.5, [time]);
     const min = useMemo(() => time - time * 0.5, [time]);
     const springedTime = Math.random() * (max - min) + min;
 
     useEffect(() => {
         const id = setTimeout(() => {
-            if (text.length >= originalText.length) {
+            // Exit at the end of the text
+            if (cursor >= originalText.length) {
                 return;
             }
 
-            setText(originalText.substring(0, length));
-            setLength(length + 1);
+            // Check for markup tags
+            if (originalText[cursor] === '[') {
+                if (originalText[cursor + 1] !== '/') {
+                    setTags([
+                        ...tags,
+                        originalText.substring(cursor, cursor + 3),
+                    ]);
+                } else {
+                    setTags(tags.slice(0, -1));
+                }
+                setCursor(
+                    cursor + originalText.substring(cursor).indexOf(']') + 1
+                );
+                return;
+            }
+
+            setText(
+                text +
+                    tags.join('') +
+                    originalText.substring(cursor, cursor + 1) +
+                    tags
+                        .map((t) => t.slice(0, 1) + '/' + t.slice(1))
+                        .slice()
+                        .reverse()
+                        .join('')
+            );
+
+            setCursor(cursor + 1);
         }, springedTime);
 
         if (text) {
@@ -32,7 +58,7 @@ export const useTypewriterAnimation = ({
         }
 
         return () => clearTimeout(id);
-    }, [length, onType, originalText, springedTime, text, text.length]);
+    }, [cursor, onType, originalText, springedTime, tags, text]);
 
     return text;
 };

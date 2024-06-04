@@ -19,7 +19,7 @@ export const FallbackError = ({ error }: { error: string }) => {
         >
             <h1 style={{ color: theme.text.error }}>ERROR!</h1>
             <p style={{ color: theme.text.p }}>Something went wrong...</p>
-            <pre style={{ color: theme.text.error }}>{error}</pre>
+            <p style={{ color: theme.text.p }}>{error}</p>
         </div>
     );
 };
