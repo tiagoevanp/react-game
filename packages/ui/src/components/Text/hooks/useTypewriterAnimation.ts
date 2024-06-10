@@ -1,64 +1,105 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
+import { useHumanize } from './useHumanize';
 
 export type UseTypewriterOptionProps = {
     time?: 2 | 4 | 8 | 16 | 32 | 64 | 128 | 256;
     onType?: (text?: string) => void;
+    humanize?: boolean;
 };
 
 export const useTypewriterAnimation = (
     originalText: string,
-    { time = 32, onType }: UseTypewriterOptionProps
+    { time, onType, humanize = true }: UseTypewriterOptionProps
 ) => {
-    const [text, setText] = useState('');
+    const text = useRef('');
+    const tag = useRef('');
     const [cursor, setCursor] = useState(0);
-    const [tags, setTags] = useState<string[]>([]);
-    const max = useMemo(() => time + time * 0.5, [time]);
-    const min = useMemo(() => time - time * 0.5, [time]);
-    const springedTime = Math.random() * (max - min) + min;
+    const humanizedTime = useHumanize(time);
+
+    const findEndTag = useCallback(() => {
+        if (!tag.current) {
+            return -1;
+        }
+
+        const tagIndex = text.current.lastIndexOf(
+            tag.current.slice(0, 1) + '/' + tag.current.slice(1)
+        );
+
+        return tagIndex;
+    }, []);
+
+    const updateText = useCallback(() => {
+        const index = findEndTag();
+
+        if (index !== -1) {
+            text.current =
+                text.current.slice(0, index) +
+                originalText.substring(cursor, cursor + 1) +
+                text.current.slice(index);
+        } else {
+            text.current =
+                text.current + originalText.substring(cursor, cursor + 1);
+        }
+
+        setCursor(cursor + 1);
+    }, [cursor, findEndTag, originalText]);
+
+    const insertTag = useCallback(() => {
+        if (originalText[cursor + 1] !== '/') {
+            const index = findEndTag();
+
+            tag.current = originalText.substring(cursor, cursor + 3);
+            const endTag = tag.current.slice(0, 1) + '/' + tag.current.slice(1);
+
+            if (index !== -1) {
+                text.current =
+                    text.current.slice(0, index) +
+                    tag.current +
+                    endTag +
+                    text.current.slice(index);
+            } else {
+                text.current = text.current + tag.current + endTag;
+            }
+        } else {
+            tag.current = '';
+        }
+
+        setCursor(cursor + originalText.substring(cursor).indexOf(']') + 1);
+    }, [cursor, findEndTag, originalText]);
 
     useEffect(() => {
-        const id = setTimeout(() => {
-            // Exit at the end of the text
-            if (cursor >= originalText.length) {
-                return;
-            }
-
-            // Check for markup tags
-            if (originalText[cursor] === '[') {
-                if (originalText[cursor + 1] !== '/') {
-                    setTags([
-                        ...tags,
-                        originalText.substring(cursor, cursor + 3),
-                    ]);
-                } else {
-                    setTags(tags.slice(0, -1));
+        const id = setTimeout(
+            () => {
+                // Exit at the end of the text
+                if (cursor >= originalText.length) {
+                    return;
                 }
-                setCursor(
-                    cursor + originalText.substring(cursor).indexOf(']') + 1
-                );
-                return;
-            }
 
-            setText(
-                text +
-                    tags.join('') +
-                    originalText.substring(cursor, cursor + 1) +
-                    tags
-                        .map((t) => t.slice(0, 1) + '/' + t.slice(1))
-                        .slice()
-                        .reverse()
-                        .join('')
-            );
+                if (originalText[cursor] === '[') {
+                    insertTag();
+                    return;
+                }
 
-            setCursor(cursor + 1);
-        }, springedTime);
+                updateText();
+            },
+            humanize ? humanizedTime : time
+        );
 
-        if (text) {
-            onType?.(text);
+        if (text.current) {
+            onType?.(text.current);
         }
 
         return () => clearTimeout(id);
-    }, [cursor, onType, originalText, springedTime, tags, text]);
+    }, [
+        cursor,
+        humanize,
+        humanizedTime,
+        insertTag,
+        onType,
+        originalText,
+        time,
+        updateText,
+    ]);
 
-    return text;
+    return text.current;
 };

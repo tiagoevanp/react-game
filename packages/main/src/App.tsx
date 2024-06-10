@@ -11,7 +11,7 @@ const App = () => {
             >
                 Change Theme
             </Button>
-            <AnimatedText markup time={100}>
+            <AnimatedText markup scale="h1">
                 Vai se [u][i]FODER[/i][/u] seu [s]safado[/s] lindo!
             </AnimatedText>
         </Application>
