@@ -304,20 +304,20 @@ function peg$parse(input, options) {
   var peg$c0 = "[";
   var peg$c1 = "]";
   var peg$c2 = "[/";
-  var peg$c3 = "b";
-  var peg$c4 = "i";
-  var peg$c5 = "u";
-  var peg$c6 = "s";
+  var peg$c3 = "i";
+  var peg$c4 = "u";
+  var peg$c5 = "s";
+  var peg$c6 = "danger";
 
   var peg$r0 = /^[^[]/;
 
   var peg$e0 = peg$literalExpectation("[", false);
   var peg$e1 = peg$literalExpectation("]", false);
   var peg$e2 = peg$literalExpectation("[/", false);
-  var peg$e3 = peg$literalExpectation("b", false);
-  var peg$e4 = peg$literalExpectation("i", false);
-  var peg$e5 = peg$literalExpectation("u", false);
-  var peg$e6 = peg$literalExpectation("s", false);
+  var peg$e3 = peg$literalExpectation("i", false);
+  var peg$e4 = peg$literalExpectation("u", false);
+  var peg$e5 = peg$literalExpectation("s", false);
+  var peg$e6 = peg$literalExpectation("danger", false);
   var peg$e7 = peg$classExpectation(["["], true, false);
 // @ts-ignore
 
@@ -839,7 +839,7 @@ peg$parseTagName() {
     var s0;
 
 // @ts-ignore
-    if (input.charCodeAt(peg$currPos) === 98) {
+    if (input.charCodeAt(peg$currPos) === 105) {
 // @ts-ignore
       s0 = peg$c3;
 // @ts-ignore
@@ -854,7 +854,7 @@ peg$parseTagName() {
 // @ts-ignore
     if (s0 === peg$FAILED) {
 // @ts-ignore
-      if (input.charCodeAt(peg$currPos) === 105) {
+      if (input.charCodeAt(peg$currPos) === 117) {
 // @ts-ignore
         s0 = peg$c4;
 // @ts-ignore
@@ -869,7 +869,7 @@ peg$parseTagName() {
 // @ts-ignore
       if (s0 === peg$FAILED) {
 // @ts-ignore
-        if (input.charCodeAt(peg$currPos) === 117) {
+        if (input.charCodeAt(peg$currPos) === 115) {
 // @ts-ignore
           s0 = peg$c5;
 // @ts-ignore
@@ -884,11 +884,11 @@ peg$parseTagName() {
 // @ts-ignore
         if (s0 === peg$FAILED) {
 // @ts-ignore
-          if (input.charCodeAt(peg$currPos) === 115) {
+          if (input.substr(peg$currPos, 6) === peg$c6) {
 // @ts-ignore
             s0 = peg$c6;
 // @ts-ignore
-            peg$currPos++;
+            peg$currPos += 6;
 // @ts-ignore
           } else {
 // @ts-ignore
@@ -1097,5 +1097,5 @@ export type Content = (Element | Text)[];
 export type Element = { name: never; content: Content };
 export type StartTag = TagName;
 export type EndTag = TagName;
-export type TagName = "b" | "i" | "u" | "s";
+export type TagName = "i" | "u" | "s" | "danger";
 export type Text = string;

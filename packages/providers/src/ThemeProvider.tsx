@@ -18,6 +18,13 @@ export const ThemeProvider = ({ children }: PropsWithChildren) => {
         [settingTheme]
     );
 
+    Object.keys(theme.globalVars).forEach((value) => {
+        document.documentElement.style.setProperty(
+            value,
+            theme.globalVars[value as `--${string}`]
+        );
+    });
+
     return (
         <EmotionThemeProvider theme={theme}>{children}</EmotionThemeProvider>
     );

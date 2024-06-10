@@ -1,6 +1,9 @@
 import { EvanBrotherTheme } from '.';
 
+const danger = '#ff5c5c';
+
 const theme: EvanBrotherTheme = {
+    name: 'dark',
     application: {
         background: '#2d2d2d',
     },
@@ -10,7 +13,10 @@ const theme: EvanBrotherTheme = {
         h3: 'white',
         h4: 'white',
         p: 'white',
-        error: '#ff5c5c',
+        error: danger,
+    },
+    globalVars: {
+        '--danger': danger,
     },
 };
 

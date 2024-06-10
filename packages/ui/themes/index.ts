@@ -2,6 +2,7 @@ export { default as light } from './light';
 export { default as dark } from './dark';
 
 export interface EvanBrotherTheme {
+    name: 'light' | 'dark';
     application: {
         background: string;
     };
@@ -13,4 +14,5 @@ export interface EvanBrotherTheme {
         p: string;
         error: string;
     };
+    globalVars: Record<`--${string}`, string>;
 }

@@ -13,9 +13,9 @@ body {
 }
 
 :root {
-    --theme-smooth-animtation-time: 200ms;
+    --theme-smooth-animation-time: 200ms;
 }
 
 .theme-smooth-transition {
-    transition: background-color var(--theme-smooth-animtation-time) ease-in-out, color var(--theme-smooth-animtation-time) ease-in-out;
+    transition: background-color var(--theme-smooth-animation-time) ease-in-out, color var(--theme-smooth-animation-time) ease-in-out;
 }

@@ -22,7 +22,7 @@ EndTag
   = "[/" name:TagName "]" { return name; }
 
 TagName
-  = 'i'/'u'/'s'
+  = 'i'/'u'/'s'/'danger'
 
 Text
   = chars:[^[]+  { return chars.join(""); }
