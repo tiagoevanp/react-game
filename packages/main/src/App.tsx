@@ -12,8 +12,8 @@ const App = () => {
                 Change Theme
             </Button>
             <AnimatedText markup scale="h1">
-                Este é um teste simples de [danger]markdown[/danger] +
-                animações!
+                Este é um teste [i]simples[/i] de
+                [danger][u]markdown[/u][/danger] [s]mais[/s] + animações!
             </AnimatedText>
         </Application>
     );

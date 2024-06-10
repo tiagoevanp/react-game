@@ -50,7 +50,10 @@ export const useTypewriterAnimation = (
         if (originalText[cursor + 1] !== '/') {
             const index = findEndTag();
 
-            tag.current = originalText.substring(cursor, cursor + 3);
+            tag.current = originalText.substring(
+                cursor,
+                cursor + originalText.substring(cursor).indexOf(']') + 1
+            );
             const endTag = tag.current.slice(0, 1) + '/' + tag.current.slice(1);
 
             if (index !== -1) {

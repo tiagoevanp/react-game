@@ -16,11 +16,7 @@ export const markup = (parsedText: Content): JSX.Element[] => {
         return typeof el === 'string' ? (
             <span key={key}>{el}</span>
         ) : (
-            <span
-                className="theme-smooth-transition"
-                style={getElStyle(el.name)}
-                key={key}
-            >
+            <span style={getElStyle(el.name)} key={key}>
                 {markup(el.content)}
             </span>
         );

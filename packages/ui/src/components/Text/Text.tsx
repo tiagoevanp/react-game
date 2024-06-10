@@ -14,10 +14,7 @@ export const _Text = ({ children, scale, markup }: _TextProps) => {
 
     return (
         <>
-            <Component
-                className="theme-smooth-transition"
-                style={{ color: theme.text.h1 }}
-            >
+            <Component style={{ color: theme.text.h1 }}>
                 {markup ? markupFn(parse(children)) : children}
             </Component>
         </>

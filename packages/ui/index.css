@@ -17,5 +17,5 @@ body {
 }
 
 .theme-smooth-transition {
-    transition: background-color var(--theme-smooth-animation-time) ease-in-out, color var(--theme-smooth-animation-time) ease-in-out;
+    transition: background-color var(--theme-smooth-animation-time) ease-in-out;
 }
