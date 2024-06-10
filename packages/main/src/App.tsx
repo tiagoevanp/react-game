@@ -12,7 +12,7 @@ const App = () => {
                 Change Theme
             </Button>
             <AnimatedText markup scale="h1">
-                Vai se [u][i]FODER[/i][/u] seu [s]safado[/s] lindo!
+                Este é um teste simples de markdown + animações!
             </AnimatedText>
         </Application>
     );

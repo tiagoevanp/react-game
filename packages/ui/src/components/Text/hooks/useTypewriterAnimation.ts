@@ -3,7 +3,7 @@ import { useHumanize } from './useHumanize';
 
 export type UseTypewriterOptionProps = {
     time?: 2 | 4 | 8 | 16 | 32 | 64 | 128 | 256;
-    onType?: (text?: string) => void;
+    onType?: (char: string) => void;
     humanize?: boolean;
 };
 
@@ -30,19 +30,21 @@ export const useTypewriterAnimation = (
 
     const updateText = useCallback(() => {
         const index = findEndTag();
+        const character = originalText.substring(cursor, cursor + 1);
 
         if (index !== -1) {
             text.current =
                 text.current.slice(0, index) +
-                originalText.substring(cursor, cursor + 1) +
+                character +
                 text.current.slice(index);
         } else {
-            text.current =
-                text.current + originalText.substring(cursor, cursor + 1);
+            text.current = text.current + character;
         }
 
+        onType?.(character);
+
         setCursor(cursor + 1);
-    }, [cursor, findEndTag, originalText]);
+    }, [cursor, findEndTag, onType, originalText]);
 
     const insertTag = useCallback(() => {
         if (originalText[cursor + 1] !== '/') {
@@ -84,10 +86,6 @@ export const useTypewriterAnimation = (
             },
             humanize ? humanizedTime : time
         );
-
-        if (text.current) {
-            onType?.(text.current);
-        }
 
         return () => clearTimeout(id);
     }, [
