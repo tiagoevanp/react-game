@@ -1,13 +1,15 @@
 import { useTheme } from '@emotion/react';
-import { markup as markupFn, parse } from '@evanbrother/parser';
+import { parse } from '@evanbrother/parser';
 
-export type _TextProps = {
+import { Markup } from './Markup';
+
+export type TextProps = {
     scale?: 'h1' | 'h2' | 'h3' | 'h4' | 'p';
     markup?: boolean;
     children: string;
 };
 
-export const _Text = ({ children, scale, markup }: _TextProps) => {
+export const Text = ({ children, scale, markup }: TextProps) => {
     const theme = useTheme();
 
     const Component = scale ?? 'p';
@@ -15,7 +17,7 @@ export const _Text = ({ children, scale, markup }: _TextProps) => {
     return (
         <>
             <Component style={{ color: theme.text.h1 }}>
-                {markup ? markupFn(parse(children)) : children}
+                {markup ? <Markup parsed={parse(children)} /> : children}
             </Component>
         </>
     );

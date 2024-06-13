@@ -1,2 +1,2 @@
-export { PlainText } from './PlainText';
-export { AnimatedText } from './AnimatedText';
+export { Text } from './Text';
+export { TypewriterText } from './TypewriterText';

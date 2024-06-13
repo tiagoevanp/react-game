@@ -1,5 +1,5 @@
 import { useSetting } from '@evanbrother/providers';
-import { AnimatedText, Application, Button } from '@evanbrother/ui';
+import { Application, Button, Text } from '@evanbrother/ui';
 
 const App = () => {
     const [theme, setTheme] = useSetting('theme');
@@ -11,10 +11,10 @@ const App = () => {
             >
                 Change Theme
             </Button>
-            <AnimatedText markup scale="h1">
-                Este é um teste [i]simples[/i] de
-                [danger][u]markdown[/u][/danger] [s]mais[/s] + animações!
-            </AnimatedText>
+            <Text markup scale="h1">
+                Este é um [s][u]teste[/u][/s] [i]da[/i] animação [c
+                danger][~]snake snake snake[/~][/c]!
+            </Text>
         </Application>
     );
 };

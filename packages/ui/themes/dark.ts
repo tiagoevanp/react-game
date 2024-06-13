@@ -1,5 +1,7 @@
 import { EvanBrotherTheme } from '.';
 
+const success = '#5cff69';
+const warning = '#fff75c';
 const danger = '#ff5c5c';
 
 const theme: EvanBrotherTheme = {
@@ -16,6 +18,8 @@ const theme: EvanBrotherTheme = {
         error: danger,
     },
     globalVars: {
+        '--success': success,
+        '--warning': warning,
         '--danger': danger,
     },
 };

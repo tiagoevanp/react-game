@@ -22,7 +22,10 @@ export const useTypewriterAnimation = (
         }
 
         const tagIndex = text.current.lastIndexOf(
-            tag.current.slice(0, 1) + '/' + tag.current.slice(1)
+            tag.current.slice(0, 1) +
+                '/' +
+                tag.current.slice(1, tag.current.indexOf(' ')) +
+                ']'
         );
 
         return tagIndex;
@@ -54,7 +57,12 @@ export const useTypewriterAnimation = (
                 cursor,
                 cursor + originalText.substring(cursor).indexOf(']') + 1
             );
-            const endTag = tag.current.slice(0, 1) + '/' + tag.current.slice(1);
+
+            const endTag =
+                tag.current.slice(0, 1) +
+                '/' +
+                tag.current.slice(1, tag.current.indexOf(' ')) +
+                ']';
 
             if (index !== -1) {
                 text.current =
