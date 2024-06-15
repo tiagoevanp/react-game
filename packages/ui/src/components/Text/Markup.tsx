@@ -5,6 +5,7 @@ import { Underline } from './markup-elements/Underline';
 import { Colored } from './markup-elements/Colored';
 import { Variant } from '@evanbrother/parser/src/parser';
 import { Snake } from './markup-elements/Snake';
+import { Shake } from './markup-elements/Shake';
 
 export const Markup = ({ parsed }: { parsed: Content }) => {
     return parsed.map((el, idx) => {
@@ -38,7 +39,8 @@ export const Markup = ({ parsed }: { parsed: Content }) => {
                 />
             ),
             // Forcing '~' to be the last tag before a string content
-            '~': <Snake key={idx} text={el.content[0] || ''} />,
+            '~': <Snake key={idx} text={(el.content[0] as string) || ''} />,
+            '^': <Shake key={idx} text={(el.content[0] as string) || ''} />,
         }[el.tag.name];
     });
 };

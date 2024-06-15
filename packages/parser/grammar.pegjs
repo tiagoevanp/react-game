@@ -36,7 +36,7 @@ EndTag
   = "[/" name:TagName "]" { return name; }
 
 TagName
-  = 'c'/'i'/'u'/'s'/'~'
+  = 'c'/'i'/'u'/'s'/'~'/'^'
 
 Variant
   = ' '|1| variant:('success'/'warning'/'danger') { return variant }

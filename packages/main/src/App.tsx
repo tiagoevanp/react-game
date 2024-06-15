@@ -13,7 +13,7 @@ const App = () => {
             </Button>
             <TypewriterText markup scale="h1">
                 Este é um [s][u]teste[/u][/s] [i]da[/i] animação [c
-                danger][~]&lt;D===================-[/~][/c]!
+                danger][^]Shaking text[/^][/c]!
             </TypewriterText>
         </Application>
     );
