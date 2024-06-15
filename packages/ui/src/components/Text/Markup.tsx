@@ -13,7 +13,11 @@ export const Markup = ({ parsed }: { parsed: Content }) => {
         }
 
         // Forcing '~' to be the last tag before a string content
-        if (el.tag.name === '~' && typeof el.content[0] !== 'string') {
+        if (
+            el.tag.name === '~' &&
+            el.content[0] &&
+            typeof el.content[0] !== 'string'
+        ) {
             console.log(el.content[0]);
             throw new Error(
                 `[${el.tag.name}] inside content cannot be different from a string`
@@ -34,7 +38,7 @@ export const Markup = ({ parsed }: { parsed: Content }) => {
                 />
             ),
             // Forcing '~' to be the last tag before a string content
-            '~': <Snake key={idx} text={el.content[0] as string} />,
+            '~': <Snake key={idx} text={el.content[0] || ''} />,
         }[el.tag.name];
     });
 };
