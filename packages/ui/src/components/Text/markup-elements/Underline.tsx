@@ -1,5 +1,6 @@
 import { css } from '@emotion/react';
 import { Content } from '@evanbrother/parser';
+
 import { Markup } from '../Markup';
 
 export const Underline = ({ content }: { content: Content }) => {

@@ -3,12 +3,13 @@ import type {
     StartColorTag,
     StartVelocityTag,
 } from '@evanbrother/parser';
+
+import { Colored } from './markup-elements/Colored';
 import { Italic } from './markup-elements/Italic';
+import { Shake } from './markup-elements/Shake';
+import { Snake } from './markup-elements/Snake';
 import { Strikethrough } from './markup-elements/Strikethrough';
 import { Underline } from './markup-elements/Underline';
-import { Colored } from './markup-elements/Colored';
-import { Snake } from './markup-elements/Snake';
-import { Shake } from './markup-elements/Shake';
 import { Velocity } from './markup-elements/Velocity';
 
 export const Markup = ({ parsed }: { parsed: Content }) => {

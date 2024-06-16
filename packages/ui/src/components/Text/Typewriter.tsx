@@ -1,4 +1,5 @@
 import { TypewriterProvider } from '@evanbrother/providers';
+
 import { TypewriterText, type TypewriterTextProps } from './TypewriterText';
 
 type TypewriterProps = TypewriterTextProps;

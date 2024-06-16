@@ -1,6 +1,6 @@
-import { Text, TextProps } from './Text';
 import type { UseTypewriterOptionProps } from './hooks/useTypewriterAnimation';
 import { useTypewriterAnimation } from './hooks/useTypewriterAnimation';
+import { Text, TextProps } from './Text';
 
 export type TypewriterTextProps = TextProps & UseTypewriterOptionProps;
 

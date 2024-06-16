@@ -1,4 +1,5 @@
 import { PropsWithChildren, createContext, useState } from 'react';
+
 import { useSetting } from './hooks';
 
 export type SettingsContextType = {

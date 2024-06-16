@@ -1,5 +1,6 @@
 import { TypewriterContextType, useTypewriter } from '@evanbrother/providers';
 import { useCallback, useEffect, useRef, useState } from 'react';
+
 import { useHumanize } from './useHumanize';
 
 export type UseTypewriterOptionProps = {

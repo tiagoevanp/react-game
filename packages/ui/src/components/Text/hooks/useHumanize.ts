@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+
 import { UseTypewriterOptionProps } from './useTypewriterAnimation';
 
 export const useHumanize = (

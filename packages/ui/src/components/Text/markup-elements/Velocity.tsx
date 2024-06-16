@@ -1,9 +1,9 @@
 import type { Content, VelocityVariant } from '@evanbrother/parser';
-
-import { Markup } from '../Markup';
 import { useTypewriter } from '@evanbrother/providers';
-import { StringToNumber } from '../../../../../../definitions/stringToNumber';
 import { useEffect } from 'react';
+
+import { StringToNumber } from '../../../../../../definitions/stringToNumber';
+import { Markup } from '../Markup';
 
 type VelocityProps = {
     content: Content;

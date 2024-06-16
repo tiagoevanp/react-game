@@ -1,5 +1,6 @@
 import { VelocityVariant } from '@evanbrother/parser';
 import { PropsWithChildren, createContext, useState } from 'react';
+
 import { StringToNumber } from '../../../definitions/stringToNumber';
 
 export type TypewriterContextType = {
