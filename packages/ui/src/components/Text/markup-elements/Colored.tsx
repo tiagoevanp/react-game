@@ -1,11 +1,11 @@
 import { css } from '@emotion/react';
-import type { Content, Variant } from '@evanbrother/parser';
+import type { ColorVariant, Content } from '@evanbrother/parser';
 
 import { Markup } from '../Markup';
 
 type ColoredProps = {
     content: Content;
-    variant: Variant;
+    variant: ColorVariant;
 };
 
 export const Colored = ({ content, variant }: ColoredProps) => {

@@ -2,7 +2,7 @@ import { Text, TextProps } from './Text';
 import type { UseTypewriterOptionProps } from './hooks/useTypewriterAnimation';
 import { useTypewriterAnimation } from './hooks/useTypewriterAnimation';
 
-type AnimatedTextProps = TextProps & UseTypewriterOptionProps;
+export type TypewriterTextProps = TextProps & UseTypewriterOptionProps;
 
 export const TypewriterText = ({
     children,
@@ -11,7 +11,7 @@ export const TypewriterText = ({
     markup,
     humanize,
     onType,
-}: AnimatedTextProps) => {
+}: TypewriterTextProps) => {
     const text = useTypewriterAnimation(children, { time, humanize, onType });
 
     return (

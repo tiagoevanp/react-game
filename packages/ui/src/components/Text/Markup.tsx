@@ -1,11 +1,15 @@
-import type { Content } from '@evanbrother/parser';
+import type {
+    Content,
+    StartColorTag,
+    StartVelocityTag,
+} from '@evanbrother/parser';
 import { Italic } from './markup-elements/Italic';
 import { Strikethrough } from './markup-elements/Strikethrough';
 import { Underline } from './markup-elements/Underline';
 import { Colored } from './markup-elements/Colored';
-import { Variant } from '@evanbrother/parser/src/parser';
 import { Snake } from './markup-elements/Snake';
 import { Shake } from './markup-elements/Shake';
+import { Velocity } from './markup-elements/Velocity';
 
 export const Markup = ({ parsed }: { parsed: Content }) => {
     return parsed.map((el, idx) => {
@@ -19,7 +23,6 @@ export const Markup = ({ parsed }: { parsed: Content }) => {
             el.content[0] &&
             typeof el.content[0] !== 'string'
         ) {
-            console.log(el.content[0]);
             throw new Error(
                 `[${el.tag.name}] inside content cannot be different from a string`
             );
@@ -34,8 +37,17 @@ export const Markup = ({ parsed }: { parsed: Content }) => {
                     key={idx}
                     content={el.content}
                     // Force typing because there is no chance of a 'c'
-                    // tag has zero variants on it by grammar.pegjs definition
-                    variant={el.tag.variant as Variant}
+                    // tag had zero variants on it by grammar.pegjs definition
+                    variant={(el.tag as StartColorTag).variant}
+                />
+            ),
+            v: (
+                <Velocity
+                    key={idx}
+                    content={el.content}
+                    // Force typing because there is no chance of a 'v'
+                    // tag had zero variants on it by grammar.pegjs definition
+                    variant={(el.tag as StartVelocityTag).variant}
                 />
             ),
             // Forcing '~' to be the last tag before a string content

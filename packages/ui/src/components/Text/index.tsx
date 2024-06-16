@@ -1,2 +1,2 @@
 export { Text } from './Text';
-export { TypewriterText } from './TypewriterText';
+export { Typewriter } from './Typewriter';

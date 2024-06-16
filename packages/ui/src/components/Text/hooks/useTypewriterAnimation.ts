@@ -1,20 +1,22 @@
+import { TypewriterContextType, useTypewriter } from '@evanbrother/providers';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useHumanize } from './useHumanize';
 
 export type UseTypewriterOptionProps = {
-    time?: 2 | 4 | 8 | 16 | 32 | 64 | 128 | 256;
+    time?: TypewriterContextType['time'];
     onType?: (char: string) => void;
     humanize?: boolean;
 };
 
 export const useTypewriterAnimation = (
     originalText: string,
-    { time, onType, humanize = true }: UseTypewriterOptionProps
+    { time = 32, onType, humanize = false }: UseTypewriterOptionProps
 ) => {
+    const { time: typewriterTime, setTime } = useTypewriter();
     const text = useRef('');
     const tag = useRef('');
     const [cursor, setCursor] = useState(0);
-    const humanizedTime = useHumanize(time);
+    const humanizedTime = useHumanize(typewriterTime);
 
     const findEndTag = useCallback(() => {
         if (!tag.current) {
@@ -74,11 +76,15 @@ export const useTypewriterAnimation = (
                 text.current = text.current + tag.current + endTag;
             }
         } else {
+            if (originalText[cursor + 2] === 'v') {
+                setTime(time);
+            }
+
             tag.current = '';
         }
 
         setCursor(cursor + originalText.substring(cursor).indexOf(']') + 1);
-    }, [cursor, findEndTag, originalText]);
+    }, [cursor, findEndTag, originalText, setTime, time]);
 
     useEffect(() => {
         const id = setTimeout(
@@ -95,7 +101,7 @@ export const useTypewriterAnimation = (
 
                 updateText();
             },
-            humanize ? humanizedTime : time
+            humanize ? humanizedTime : typewriterTime
         );
 
         return () => clearTimeout(id);
@@ -104,11 +110,14 @@ export const useTypewriterAnimation = (
         humanize,
         humanizedTime,
         insertTag,
-        onType,
         originalText,
-        time,
+        typewriterTime,
         updateText,
     ]);
+
+    useEffect(() => {
+        setTime(time);
+    }, [setTime, time]);
 
     return text.current;
 };

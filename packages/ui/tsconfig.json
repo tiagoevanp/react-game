@@ -3,6 +3,11 @@
     "compilerOptions": {
         "jsxImportSource": "@emotion/react"
     },
-    "include": ["src", "definitions", "index.ts"],
+    "include": [
+        "src",
+        "definitions",
+        "index.ts",
+        "../../definitions/stringToNumber.ts"
+    ],
     "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -1,5 +1,5 @@
 import { useSetting } from '@evanbrother/providers';
-import { Application, Button, TypewriterText } from '@evanbrother/ui';
+import { Application, Button, Typewriter } from '@evanbrother/ui';
 
 const App = () => {
     const [theme, setTheme] = useSetting('theme');
@@ -11,10 +11,10 @@ const App = () => {
             >
                 Change Theme
             </Button>
-            <TypewriterText markup scale="h1">
-                Este é um [s][u]teste[/u][/s] [i]da[/i] animação [c
-                danger][^]Shaking text[/^][/c]!
-            </TypewriterText>
+            <Typewriter markup scale="h1">
+                Você... [c danger][v 256][^]AAAAAAAAAAH![/^][/v][/c] corra o
+                mais rápido que puder!
+            </Typewriter>
         </Application>
     );
 };
