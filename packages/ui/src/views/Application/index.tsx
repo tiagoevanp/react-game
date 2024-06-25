@@ -6,9 +6,12 @@ export const Application = ({ children }: PropsWithChildren) => {
 
     const style = css`
         display: flex;
+        box-sizing: border-box;
         flex-direction: column;
+        gap: 40px;
         width: 100vw;
         height: 100vh;
+        padding: 100px;
     `;
 
     return (

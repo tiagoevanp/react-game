@@ -1,20 +1,19 @@
-import { useSetting } from '@evanbrother/providers';
-import { Application, Button, Typewriter } from '@evanbrother/ui';
+import { Application, Button, Navigator, Text } from '@evanbrother/ui';
+
+import { ChangeThemeButton } from './ChangeThemeButton';
 
 const App = () => {
-    const [theme, setTheme] = useSetting('theme');
-
     return (
         <Application>
-            <Button
-                onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}
-            >
-                Change Theme
-            </Button>
-            <Typewriter markup scale="h1">
-                Você... [c danger][v 256][^]AAAAAAAAAAH![/^][/v][/c] corra o
-                mais rápido que puder!
-            </Typewriter>
+            <ChangeThemeButton />
+            <Text align="center" scale="h1">
+                REACT GAME
+            </Text>
+            <Navigator>
+                <Button onClick={() => console.log(1)}>Option 1</Button>
+                <Button onClick={() => console.log(2)}>Option 2</Button>
+                <Button onClick={() => console.log(3)}>Option 3</Button>
+            </Navigator>
         </Application>
     );
 };

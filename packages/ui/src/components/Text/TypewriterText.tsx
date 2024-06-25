@@ -6,17 +6,12 @@ export type TypewriterTextProps = TextProps & UseTypewriterOptionProps;
 
 export const TypewriterText = ({
     children,
-    scale,
     time,
-    markup,
     humanize,
     onType,
+    ...props
 }: TypewriterTextProps) => {
     const text = useTypewriterAnimation(children, { time, humanize, onType });
 
-    return (
-        <Text scale={scale} markup={markup}>
-            {text}
-        </Text>
-    );
+    return <Text {...props}>{text}</Text>;
 };
