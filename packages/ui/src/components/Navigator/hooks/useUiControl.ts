@@ -17,28 +17,53 @@ const getLastColumnIndexOfRow = (columns: NavigatorProps['columns'], selected: {
     return columns.findLastIndex((column) => column[selected.row] !== undefined);
 };
 
-const getNextColumnIndex = (columns: NavigatorProps['columns'], selected: { row: number; column: number }) => {
+const getNextColumnIndex = (columns: NavigatorProps['columns'], selected: { row: number; column: number }): number => {
+    const firstColumnIndexOfRow = getFirstColumnIndexOfRow(columns, selected);
+
     if (columns[selected.column + 1] === undefined) {
-        return getFirstColumnIndexOfRow(columns, selected);
+        return firstColumnIndexOfRow;
     }
 
     if (columns[selected.column + 1][selected.row] !== undefined) {
+        if (columns[selected.column + 1][selected.row].props.disabled) {
+            return getNextColumnIndex(columns, { row: selected.row, column: selected.column + 1 });
+        }
         return selected.column + 1;
     }
 
-    return getFirstColumnIndexOfRow(columns, selected);
+    if (columns[selected.column + 1][selected.row] === undefined) {
+        if (columns[firstColumnIndexOfRow][selected.row].props.disabled) {
+            return getNextColumnIndex(columns, { row: selected.row, column: firstColumnIndexOfRow });
+        }
+    }
+
+    return firstColumnIndexOfRow;
 };
 
-const getPreviousColumnIndex = (columns: NavigatorProps['columns'], selected: { row: number; column: number }) => {
+const getPreviousColumnIndex = (
+    columns: NavigatorProps['columns'],
+    selected: { row: number; column: number }
+): number => {
+    const lastColumnIndexOfRow = getLastColumnIndexOfRow(columns, selected);
+
     if (columns[selected.column - 1] === undefined) {
-        return getLastColumnIndexOfRow(columns, selected);
+        return lastColumnIndexOfRow;
     }
 
     if (columns[selected.column - 1][selected.row] !== undefined) {
+        if (columns[selected.column - 1][selected.row].props.disabled) {
+            return getPreviousColumnIndex(columns, { row: selected.row, column: selected.column - 1 });
+        }
         return selected.column - 1;
     }
 
-    return getLastColumnIndexOfRow(columns, selected);
+    if (columns[selected.column - 1][selected.row] === undefined) {
+        if (columns[lastColumnIndexOfRow][selected.row].props.disabled) {
+            return getPreviousColumnIndex(columns, { row: selected.row, column: lastColumnIndexOfRow });
+        }
+    }
+
+    return lastColumnIndexOfRow;
 };
 
 export const useUiControl = (columns: NavigatorProps['columns']) => {
@@ -56,8 +81,18 @@ export const useUiControl = (columns: NavigatorProps['columns']) => {
 
                 const previousIndex = selected.row - 1;
                 const hasPrevious = previousIndex >= 0;
+                const lastRowIndex = getColumnLength(columns, selected.column) - 1;
+
+                if (hasPrevious && columns[selected.column][previousIndex].props.disabled) {
+                    actions.goUp();
+                }
+
+                if (!hasPrevious && columns[selected.column][lastRowIndex].props.disabled) {
+                    actions.goUp();
+                }
+
                 return {
-                    row: hasPrevious ? previousIndex : getColumnLength(columns, selected.column) - 1,
+                    row: hasPrevious ? previousIndex : lastRowIndex,
                     column: selected.column,
                 };
             });
@@ -71,6 +106,15 @@ export const useUiControl = (columns: NavigatorProps['columns']) => {
 
                 const nextIndex = selected.row + 1;
                 const hasNext = nextIndex <= getColumnLength(columns, selected.column) - 1;
+
+                if (hasNext && columns[selected.column][nextIndex].props.disabled) {
+                    actions.goDown();
+                }
+
+                if (!hasNext && columns[selected.column][0].props.disabled) {
+                    actions.goDown();
+                }
+
                 return {
                     row: hasNext ? nextIndex : 0,
                     column: selected.column,

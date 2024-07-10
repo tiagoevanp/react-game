@@ -10,6 +10,10 @@ export const useMouse = (clear: () => void) => {
                 return;
             }
 
+            if (e.target.disabled) {
+                return;
+            }
+
             e.target.style.backgroundColor = theme.application['button-selected'].backgroundColor;
             e.target.style.borderColor = theme.application['button-selected'].borderColor;
             e.target.style.color = theme.application['button-selected'].color;
