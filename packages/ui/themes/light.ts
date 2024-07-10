@@ -23,6 +23,11 @@ const theme: EvanBrotherTheme = {
             backgroundColor: white,
             color: black,
         },
+        'button-selected': {
+            borderColor: black,
+            backgroundColor: black,
+            color: white,
+        },
     },
     globalVars: {
         '--success': success,

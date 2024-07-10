@@ -6,11 +6,7 @@ export const ChangeThemeButton = () => {
 
     return (
         <div style={{ position: 'absolute', top: '10px', right: '10px' }}>
-            <Button
-                onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-            >
-                Th
-            </Button>
+            <Button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>Th</Button>
         </div>
     );
 };

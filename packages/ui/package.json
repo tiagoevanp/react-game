@@ -1,40 +1,40 @@
 {
-  "name": "@evanbrother/ui",
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "build": "tsc && vite build",
-    "lint": "bun run _eslint & bun run _stylelint",
-    "_eslint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "_stylelint": "stylelint '**/*.{css,tsx}'",
-    "preview": "vite preview",
-    "test": "bun test"
-  },
-  "dependencies": {
-    "@emotion/react": "^11.11.4",
-    "@evanbrother/parser": "workspace: *",
-    "@evanbrother/providers": "workspace: *",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-error-boundary": "^4.0.13"
-  },
-  "devDependencies": {
-    "@emotion/eslint-plugin": "^11.11.0",
-    "@evanbrother/eslint-config": "workspace: *",
-    "@happy-dom/global-registrator": "^14.11.0",
-    "@testing-library/dom": "^10.1.0",
-    "@testing-library/react": "^15.0.7",
-    "@testing-library/user-event": "^14.5.2",
-    "@types/bun": "^1.1.4",
-    "@types/react": "^18.3.3",
-    "@types/react-dom": "^18.3.0",
-    "@vitejs/plugin-react": "^4.2.1",
-    "prettier": "3.2.5",
-    "typescript": "^5.2.2",
-    "vite": "^5.2.0"
-  },
-  "peerDependencies": {
-    "@emotion/react": "*"
-  },
-  "prettier": "@evanbrother/prettier-config"
+    "name": "@evanbrother/ui",
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "build": "tsc && vite build",
+        "lint": "bun run _eslint & bun run _stylelint",
+        "_eslint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+        "_stylelint": "stylelint '**/*.{css,tsx}'",
+        "preview": "vite preview",
+        "test": "bun test"
+    },
+    "dependencies": {
+        "@emotion/react": "^11.11.4",
+        "@evanbrother/parser": "workspace: *",
+        "@evanbrother/providers": "workspace: *",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "react-error-boundary": "^4.0.13"
+    },
+    "devDependencies": {
+        "@emotion/eslint-plugin": "^11.11.0",
+        "@evanbrother/eslint-config": "workspace: *",
+        "@evanbrother/prettier-config": "workspace: *",
+        "@happy-dom/global-registrator": "^14.11.0",
+        "@testing-library/dom": "^10.1.0",
+        "@testing-library/react": "^15.0.7",
+        "@testing-library/user-event": "^14.5.2",
+        "@types/bun": "^1.1.4",
+        "@types/react": "^18.3.3",
+        "@types/react-dom": "^18.3.0",
+        "@vitejs/plugin-react": "^4.2.1",
+        "typescript": "^5.2.2",
+        "vite": "^5.2.0"
+    },
+    "peerDependencies": {
+        "@emotion/react": "*"
+    },
+    "prettier": "@evanbrother/prettier-config"
 }

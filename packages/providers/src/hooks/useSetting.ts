@@ -7,25 +7,25 @@ import { SettingsContext, SettingsContextType } from '../SettingsProvider';
 export const useSetting = <T extends keyof SettingsContextType['settings']>(
     settingName: T
 ): [SettingsContextType['settings'][T], (value: SettingsContextType['settings'][T]) => void] => {
-    const [localSetting, setLocalSetting] = useLocalStorage(settingName);
-    const setting = useJsonParsedValue(localSetting);
-    const { settings: stateSettings, setSettings: setStateSettings } = useContext(SettingsContext);
+    const [localStorageSetting, setLocalStorageSetting] = useLocalStorage(settingName);
+    const setting = useJsonParsedValue(localStorageSetting);
+    const { settings, setSettings } = useContext(SettingsContext);
 
     const setSetting = useCallback(
         (value: SettingsContextType['settings'][T]) => {
             const _settings = {
-                ...stateSettings,
+                ...settings,
             };
 
             _settings[settingName] = value;
 
             const stringValue = typeof value !== 'string' ? JSON.stringify(value) : value;
 
-            setLocalSetting(stringValue);
-            setStateSettings(_settings);
+            setLocalStorageSetting(stringValue);
+            setSettings(_settings);
         },
-        [setLocalSetting, setStateSettings, settingName, stateSettings]
+        [setLocalStorageSetting, setSettings, settingName, settings]
     );
 
-    return [setting as SettingsContextType['settings'][T], setSetting];
+    return [(setting as SettingsContextType['settings'][T]) || settings[settingName], setSetting];
 };

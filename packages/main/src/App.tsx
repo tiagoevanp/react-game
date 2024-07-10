@@ -9,11 +9,24 @@ const App = () => {
             <Text align="center" scale="h1">
                 REACT GAME
             </Text>
-            <Navigator>
-                <Button onClick={() => console.log(1)}>Option 1</Button>
-                <Button onClick={() => console.log(2)}>Option 2</Button>
-                <Button onClick={() => console.log(3)}>Option 3</Button>
-            </Navigator>
+            <Navigator
+                columns={[
+                    [
+                        <Button onClick={() => console.log('1.1')}>1.1</Button>,
+                        <Button disabled onClick={() => console.log('1.2')}>
+                            1.2
+                        </Button>,
+                        <Button onClick={() => console.log('1.3')}>1.3</Button>,
+                    ],
+                    [
+                        <Button onClick={() => console.log('2.1')}>2.1</Button>,
+                        <Button onClick={() => console.log('2.2')}>2.2</Button>,
+                        <Button onClick={() => console.log('2.3')}>2.3</Button>,
+                        <Button onClick={() => console.log('2.4')}>2.4</Button>,
+                    ],
+                    [<Button onClick={() => console.log(3)}>3</Button>],
+                ]}
+            />
         </Application>
     );
 };

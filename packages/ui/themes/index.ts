@@ -16,11 +16,18 @@ type Button = {
     color: string;
 };
 
+type ButtonSelected = {
+    borderColor: string;
+    backgroundColor: string;
+    color: string;
+};
+
 export interface EvanBrotherTheme {
     name: 'light' | 'dark';
     application: {
         background: string;
         button: Button;
+        'button-selected': ButtonSelected;
         text: Text;
     };
     globalVars: Record<`--${string}`, string>;

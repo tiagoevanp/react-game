@@ -1,9 +1,8 @@
 {
   "name": "@evanbrother/prettier-config",
   "version": "0.0.0",
-  "type": "commonjs",
-  "main": "index.js",
-  "devDependencies": {
+  "main": "index.json",
+  "dependencies": {
     "prettier": "3.2.5"
   }
 }

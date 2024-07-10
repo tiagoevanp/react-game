@@ -2,13 +2,15 @@ import { PropsWithChildren, createContext, useState } from 'react';
 
 import { useSetting } from './hooks';
 
+export type KeyMap = {
+    key: KeyboardEvent['key'];
+    action: 'up' | 'down' | 'left' | 'right';
+}[];
+
 export type SettingsContextType = {
     settings: {
         theme: 'light' | 'dark';
-        keyMap: {
-            key: KeyboardEvent['key'];
-            cb: () => void;
-        }[];
+        keyMap: KeyMap;
     };
     setSettings: (value: SettingsContextType['settings']) => void;
 };
@@ -17,8 +19,22 @@ const defaultSettingsValues = {
     settings: {
         theme: 'light' as const,
         keyMap: [
-            { key: 'w', cb: () => {} },
-            { key: 's', cb: () => {} },
+            {
+                key: 'w' as const,
+                action: 'up' as const,
+            },
+            {
+                key: 's' as const,
+                action: 'down' as const,
+            },
+            {
+                key: 'a' as const,
+                action: 'left' as const,
+            },
+            {
+                key: 'd' as const,
+                action: 'right' as const,
+            },
         ],
     },
     setSettings: () => null,

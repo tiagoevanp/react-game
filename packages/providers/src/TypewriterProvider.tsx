@@ -16,9 +16,5 @@ export const TypewriterContext = createContext<TypewriterContextType>({
 export const TypewriterProvider = ({ children }: PropsWithChildren) => {
     const [time, setTime] = useState<TypewriterContextType['time']>(32);
 
-    return (
-        <TypewriterContext.Provider value={{ time, setTime }}>
-            {children}
-        </TypewriterContext.Provider>
-    );
+    return <TypewriterContext.Provider value={{ time, setTime }}>{children}</TypewriterContext.Provider>;
 };

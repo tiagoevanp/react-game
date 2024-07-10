@@ -7,7 +7,8 @@
         "src",
         "definitions",
         "index.ts",
-        "../../definitions/stringToNumber.ts"
+        "../../definitions/stringToNumber.ts",
+        "../providers/src/hooks/useKeyboard.ts"
     ],
     "references": [{ "path": "./tsconfig.node.json" }]
 }

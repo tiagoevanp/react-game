@@ -8,18 +8,14 @@ export const Application = ({ children }: PropsWithChildren) => {
         display: flex;
         box-sizing: border-box;
         flex-direction: column;
-        gap: 40px;
+        overflow: scroll;
         width: 100vw;
         height: 100vh;
         padding: 100px;
     `;
 
     return (
-        <div
-            css={style}
-            className="theme-smooth-transition"
-            style={{ backgroundColor: theme.application.background }}
-        >
+        <div css={style} className="theme-smooth-transition" style={{ backgroundColor: theme.application.background }}>
             {children}
         </div>
     );
