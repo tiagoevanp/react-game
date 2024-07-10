@@ -27,7 +27,7 @@ export const Navigator = ({ columns }: NavigatorProps) => {
     `;
 
     const { actions, selected } = useUiControl(columns);
-    console.log(selected);
+
     useKeyboard(actions);
 
     return (

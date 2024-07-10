@@ -87,6 +87,13 @@ export const useUiControl = (columns: NavigatorProps['columns']) => {
                 };
             });
         },
+
+        select: () => {
+            setSelected((selected) => {
+                columns[selected.column][selected.row].props.onClick();
+                return selected;
+            });
+        },
     };
 
     return { actions, selected };

@@ -24,7 +24,7 @@ const App = () => {
                         <Button onClick={() => console.log('2.3')}>2.3</Button>,
                         <Button onClick={() => console.log('2.4')}>2.4</Button>,
                     ],
-                    [<Button onClick={() => console.log(3)}>3</Button>],
+                    [<Button onClick={() => console.log('3')}>3</Button>],
                 ]}
             />
         </Application>

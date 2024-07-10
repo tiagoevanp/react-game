@@ -1,7 +1,8 @@
 import { useSetting } from '@evanbrother/providers';
 import { useEffect } from 'react';
+import { useUiControl } from './useUiControl';
 
-export const useKeyboard = ({ goUp, goDown, goLeft, goRight }: ReturnType<any>) => {
+export const useKeyboard = ({ goUp, goDown, goLeft, goRight, select }: ReturnType<typeof useUiControl>['actions']) => {
     const [keyMap] = useSetting('keyMap');
 
     useEffect(() => {
@@ -23,6 +24,8 @@ export const useKeyboard = ({ goUp, goDown, goLeft, goRight }: ReturnType<any>) 
                     return goLeft();
                 case 'right':
                     return goRight();
+                case 'select':
+                    return select();
             }
         };
 

@@ -4,7 +4,7 @@ import { useSetting } from './hooks';
 
 export type KeyMap = {
     key: KeyboardEvent['key'];
-    action: 'up' | 'down' | 'left' | 'right';
+    action: 'up' | 'down' | 'left' | 'right' | 'select';
 }[];
 
 export type SettingsContextType = {
@@ -34,6 +34,10 @@ const defaultSettingsValues = {
             {
                 key: 'd' as const,
                 action: 'right' as const,
+            },
+            {
+                key: 'Enter',
+                action: 'select' as const,
             },
         ],
     },
