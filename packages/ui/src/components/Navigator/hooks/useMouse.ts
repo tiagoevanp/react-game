@@ -26,5 +26,5 @@ export const useMouse = (clear: () => void) => {
         return () => {
             window.removeEventListener('mouseover', callback);
         };
-    }, []);
+    }, [theme]);
 };
