@@ -11,6 +11,10 @@ export const useKeyboard = ({ goUp, goDown, goLeft, goRight, select }: ReturnTyp
                 return e.key === key;
             })?.action;
 
+            if (!action) {
+                return;
+            }
+
             if (action) {
                 e.preventDefault();
             }

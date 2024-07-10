@@ -1,14 +1,16 @@
 import { css, useTheme } from '@emotion/react';
-import { ButtonHTMLAttributes, MouseEventHandler, PropsWithChildren } from 'react';
+import { ButtonHTMLAttributes, PropsWithChildren } from 'react';
 
 type ButtonProps = PropsWithChildren<{
-    onClick: MouseEventHandler<HTMLButtonElement>;
+    action: () => void;
     disabled?: ButtonHTMLAttributes<HTMLButtonElement>['disabled'];
     selected?: Boolean;
 }>;
 
-export const Button = ({ children, onClick, disabled, selected }: ButtonProps) => {
+export const Button = ({ children, action, disabled, selected }: ButtonProps) => {
     const theme = useTheme();
+
+    const buttonTheme = selected ? theme.application['button-selected'] : theme.application.button;
 
     const style = css`
         padding: 0.5rem;
@@ -19,7 +21,6 @@ export const Button = ({ children, onClick, disabled, selected }: ButtonProps) =
         cursor: pointer;
         width: 100%;
         height: 60px;
-        color: ${selected ? 'red' : 'white'} !important
 
         &:disabled {
             cursor: auto;
@@ -30,11 +31,16 @@ export const Button = ({ children, onClick, disabled, selected }: ButtonProps) =
     return (
         <button
             className="theme-smooth-transition"
+            onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = theme.application.button.backgroundColor;
+                e.currentTarget.style.borderColor = theme.application.button.borderColor;
+                e.currentTarget.style.color = theme.application.button.color;
+            }}
             css={style}
-            style={selected ? theme.application['button-selected'] : theme.application.button}
+            style={buttonTheme}
             type="button"
             disabled={disabled}
-            onClick={onClick}
+            onClick={action}
         >
             {children}
         </button>

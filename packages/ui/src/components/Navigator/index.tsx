@@ -2,6 +2,7 @@ import { css } from '@emotion/react';
 import { ReactElement, cloneElement, useMemo } from 'react';
 import { useKeyboard } from './hooks/useKeyboard';
 import { useUiControl } from './hooks/useUiControl';
+import { useMouse } from './hooks/useMouse';
 
 export type NavigatorProps = {
     columns: ReactElement[][];
@@ -29,6 +30,7 @@ export const Navigator = ({ columns }: NavigatorProps) => {
     const { actions, selected } = useUiControl(columns);
 
     useKeyboard(actions);
+    useMouse(actions.clear);
 
     return (
         <div css={navigatorStyle}>

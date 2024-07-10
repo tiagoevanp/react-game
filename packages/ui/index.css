@@ -18,6 +18,10 @@ button {
     font-family: FreePixel, Courier, sans-serif;
 }
 
+*:focus {
+    outline: none;
+}
+
 :root {
     --theme-smooth-animation-time: 200ms;
 }

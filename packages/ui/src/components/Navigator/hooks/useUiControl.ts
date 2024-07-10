@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { NavigatorProps } from '..';
 
-const getColumnSize = (columns: NavigatorProps['columns'], selectedColumnIdx: number) => {
+const getColumnLength = (columns: NavigatorProps['columns'], selectedColumnIdx: number) => {
     return (
         columns.find((_column, colIdx) => {
             return colIdx === selectedColumnIdx;
@@ -9,36 +9,36 @@ const getColumnSize = (columns: NavigatorProps['columns'], selectedColumnIdx: nu
     );
 };
 
-const getFirstColumnOfRow = (columns: NavigatorProps['columns'], selected: { row: number; column: number }) => {
+const getFirstColumnIndexOfRow = (columns: NavigatorProps['columns'], selected: { row: number; column: number }) => {
     return columns.findIndex((column) => column[selected.row] !== undefined);
 };
 
-const getLastColumnOfRow = (columns: NavigatorProps['columns'], selected: { row: number; column: number }) => {
+const getLastColumnIndexOfRow = (columns: NavigatorProps['columns'], selected: { row: number; column: number }) => {
     return columns.findLastIndex((column) => column[selected.row] !== undefined);
 };
 
-const getNextColumn = (columns: NavigatorProps['columns'], selected: { row: number; column: number }) => {
+const getNextColumnIndex = (columns: NavigatorProps['columns'], selected: { row: number; column: number }) => {
     if (columns[selected.column + 1] === undefined) {
-        return getFirstColumnOfRow(columns, selected);
+        return getFirstColumnIndexOfRow(columns, selected);
     }
 
     if (columns[selected.column + 1][selected.row] !== undefined) {
         return selected.column + 1;
     }
 
-    return getFirstColumnOfRow(columns, selected);
+    return getFirstColumnIndexOfRow(columns, selected);
 };
 
-const getPreviousColumn = (columns: NavigatorProps['columns'], selected: { row: number; column: number }) => {
+const getPreviousColumnIndex = (columns: NavigatorProps['columns'], selected: { row: number; column: number }) => {
     if (columns[selected.column - 1] === undefined) {
-        return getLastColumnOfRow(columns, selected);
+        return getLastColumnIndexOfRow(columns, selected);
     }
 
     if (columns[selected.column - 1][selected.row] !== undefined) {
         return selected.column - 1;
     }
 
-    return getLastColumnOfRow(columns, selected);
+    return getLastColumnIndexOfRow(columns, selected);
 };
 
 export const useUiControl = (columns: NavigatorProps['columns']) => {
@@ -50,10 +50,14 @@ export const useUiControl = (columns: NavigatorProps['columns']) => {
     const actions = {
         goUp: () => {
             setSelected((selected) => {
+                if (selected.column === -1 && selected.row === -1) {
+                    return { row: 0, column: 0 };
+                }
+
                 const previousIndex = selected.row - 1;
                 const hasPrevious = previousIndex >= 0;
                 return {
-                    row: hasPrevious ? previousIndex : getColumnSize(columns, selected.column) - 1,
+                    row: hasPrevious ? previousIndex : getColumnLength(columns, selected.column) - 1,
                     column: selected.column,
                 };
             });
@@ -61,8 +65,12 @@ export const useUiControl = (columns: NavigatorProps['columns']) => {
 
         goDown: () => {
             setSelected((selected) => {
+                if (selected.column === -1 && selected.row === -1) {
+                    return { row: 0, column: 0 };
+                }
+
                 const nextIndex = selected.row + 1;
-                const hasNext = nextIndex <= getColumnSize(columns, selected.column) - 1;
+                const hasNext = nextIndex <= getColumnLength(columns, selected.column) - 1;
                 return {
                     row: hasNext ? nextIndex : 0,
                     column: selected.column,
@@ -72,27 +80,43 @@ export const useUiControl = (columns: NavigatorProps['columns']) => {
 
         goLeft: () => {
             setSelected((selected) => {
+                if (selected.column === -1 && selected.row === -1) {
+                    return { row: 0, column: 0 };
+                }
+
                 return {
                     row: selected.row,
-                    column: getPreviousColumn(columns, selected),
+                    column: getPreviousColumnIndex(columns, selected),
                 };
             });
         },
 
         goRight: () => {
             setSelected((selected) => {
+                if (selected.column === -1 && selected.row === -1) {
+                    return { row: 0, column: 0 };
+                }
+
                 return {
                     row: selected.row,
-                    column: getNextColumn(columns, selected),
+                    column: getNextColumnIndex(columns, selected),
                 };
             });
         },
 
         select: () => {
             setSelected((selected) => {
-                columns[selected.column][selected.row].props.onClick();
+                if (selected.column === -1 && selected.row === -1) {
+                    return { row: 0, column: 0 };
+                }
+
+                columns[selected.column][selected.row].props.action();
                 return selected;
             });
+        },
+
+        clear: () => {
+            setSelected({ row: -1, column: -1 });
         },
     };
 

@@ -39,6 +39,10 @@ const defaultSettingsValues = {
                 key: 'Enter',
                 action: 'select' as const,
             },
+            {
+                key: ' ',
+                action: 'select' as const,
+            },
         ],
     },
     setSettings: () => null,
