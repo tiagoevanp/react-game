@@ -4,6 +4,7 @@ export * from './src/hooks';
 export { SettingsProvider } from './src/SettingsProvider';
 export { ThemeProvider } from './src/ThemeProvider';
 export { TypewriterProvider } from './src/TypewriterProvider';
+export { NavigatorProvider } from './src/NavigatorProvider';
 
 // Types
 export type { TypewriterContextType } from './src/TypewriterProvider';

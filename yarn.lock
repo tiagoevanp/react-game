@@ -631,13 +631,16 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@evanbrother/eslint-config@workspace:packages/eslint-config"
   dependencies:
+    "@types/react": "npm:^19.1.8"
     "@typescript-eslint/parser": "npm:^7.13.0"
+    bun-types: "npm:~0.8.1"
     eslint: "npm:^8.57.0"
     eslint-config-prettier: "npm:^9.1.0"
     eslint-import-resolver-typescript: "npm:^3.6.1"
     eslint-import-resolver-typescript-bun: "npm:^0.0.93"
     eslint-plugin-import: "npm:^2.29.1"
     eslint-plugin-react-hooks: "npm:^4.6.2"
+    typescript: "npm:^5.8.3"
     typescript-eslint: "npm:^7.10.0"
   languageName: unknown
   linkType: soft
@@ -669,6 +672,7 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:^7.2.0"
     "@typescript-eslint/parser": "npm:^7.2.0"
     eslint: "npm:^8.57.0"
+    peggy: "npm:^3.0.2"
     prettier: "npm:3.2.5"
     ts-pegjs: "npm:^4.2.1"
     typescript: "npm:^5.2.2"
@@ -688,6 +692,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@evanbrother/providers@workspace:packages/providers"
   dependencies:
+    "@emotion/eslint-plugin": "npm:^11.11.0"
+    "@emotion/react": "npm:^11.11.4"
     "@evanbrother/eslint-config": "workspace: *"
     "@evanbrother/parser": "workspace: *"
     "@evanbrother/prettier-config": "workspace: *"
@@ -695,6 +701,7 @@ __metadata:
     "@types/react": "npm:^18.2.66"
     "@types/react-dom": "npm:^18.2.22"
     "@vitejs/plugin-react": "npm:^4.2.1"
+    eslint: "npm:^8.50.0"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
     react-use-localstorage: "npm:^3.5.3"
@@ -707,7 +714,9 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@evanbrother/stylelint-config@workspace:packages/stylelint-config"
   dependencies:
+    postcss: "npm:^8.5.6"
     postcss-styled-syntax: "npm:^0.6.4"
+    prettier: "npm:^3.6.2"
     stylelint: "npm:^16.6.0"
     stylelint-config-standard: "npm:^36.0.0"
     stylelint-prettier: "npm:^5.0.0"
@@ -732,13 +741,12 @@ __metadata:
     "@types/react": "npm:^18.3.3"
     "@types/react-dom": "npm:^18.3.0"
     "@vitejs/plugin-react": "npm:^4.2.1"
+    eslint: "npm:^8.50.0"
     react: "npm:^18.2.0"
     react-dom: "npm:^18.2.0"
     react-error-boundary: "npm:^4.0.13"
     typescript: "npm:^5.2.2"
     vite: "npm:^5.2.0"
-  peerDependencies:
-    "@emotion/react": "*"
   languageName: unknown
   linkType: soft
 
@@ -1249,6 +1257,15 @@ __metadata:
     "@types/prop-types": "npm:*"
     csstype: "npm:^3.0.2"
   checksum: 10c0/49331800b76572eb2992a5c44801dbf8c612a5f99c8f4e4200f06c7de6f3a6e9455c661784a6c5469df96fa45622cb4a9d0982c44e6a0d5719be5f2ef1f545ed
+  languageName: node
+  linkType: hard
+
+"@types/react@npm:^19.1.8":
+  version: 19.1.8
+  resolution: "@types/react@npm:19.1.8"
+  dependencies:
+    csstype: "npm:^3.0.2"
+  checksum: 10c0/4908772be6dc941df276931efeb0e781777fa76e4d5d12ff9f75eb2dcc2db3065e0100efde16fde562c5bafa310cc8f50c1ee40a22640459e066e72cd342143e
   languageName: node
   linkType: hard
 
@@ -1895,6 +1912,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"bun-types@npm:~0.8.1":
+  version: 0.8.1
+  resolution: "bun-types@npm:0.8.1"
+  checksum: 10c0/1aefe212ab126df600f7845d8aa49d8aa3dcf6a856d241804f8727b524e2cfe0f2e4e430bc08003a3bf6bdcde56dedd4ba8dfe7408e8e3e7bedf66a7491c00ee
+  languageName: node
+  linkType: hard
+
 "cacache@npm:^19.0.1":
   version: 19.0.1
   resolution: "cacache@npm:19.0.1"
@@ -2015,6 +2039,13 @@ __metadata:
   version: 2.9.3
   resolution: "colord@npm:2.9.3"
   checksum: 10c0/9699e956894d8996b28c686afe8988720785f476f59335c80ce852ded76ab3ebe252703aec53d9bef54f6219aea6b960fb3d9a8300058a1d0c0d4026460cd110
+  languageName: node
+  linkType: hard
+
+"commander@npm:^10.0.0":
+  version: 10.0.1
+  resolution: "commander@npm:10.0.1"
+  checksum: 10c0/53f33d8927758a911094adadda4b2cbac111a5b377d8706700587650fd8f45b0bbe336de4b5c3fe47fd61f420a3d9bd452b6e0e6e5600a7e74d7bf0174f6efe3
   languageName: node
   linkType: hard
 
@@ -2661,7 +2692,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eslint@npm:^8.57.0":
+"eslint@npm:^8.50.0, eslint@npm:^8.57.0":
   version: 8.57.1
   resolution: "eslint@npm:8.57.1"
   dependencies:
@@ -4362,6 +4393,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"peggy@npm:^3.0.2":
+  version: 3.0.2
+  resolution: "peggy@npm:3.0.2"
+  dependencies:
+    commander: "npm:^10.0.0"
+    source-map-generator: "npm:0.8.0"
+  bin:
+    peggy: bin/peggy.js
+  checksum: 10c0/73c61e4478e015d6ba78736914d53b464318649f4727164d58ded3ce0f71d58e009451dbb8d01de53f2a30378aec9cdd44bc76c926dc9ba7d513f12aa3923cb1
+  languageName: node
+  linkType: hard
+
 "picocolors@npm:^1.1.1":
   version: 1.1.1
   resolution: "picocolors@npm:1.1.1"
@@ -4476,6 +4519,15 @@ __metadata:
   bin:
     prettier: bin-prettier.js
   checksum: 10c0/463ea8f9a0946cd5b828d8cf27bd8b567345cf02f56562d5ecde198b91f47a76b7ac9eae0facd247ace70e927143af6135e8cf411986b8cb8478784a4d6d724a
+  languageName: node
+  linkType: hard
+
+"prettier@npm:^3.6.2":
+  version: 3.6.2
+  resolution: "prettier@npm:3.6.2"
+  bin:
+    prettier: bin/prettier.cjs
+  checksum: 10c0/488cb2f2b99ec13da1e50074912870217c11edaddedeadc649b1244c749d15ba94e846423d062e2c4c9ae683e2d65f754de28889ba06e697ac4f988d44f45812
   languageName: node
   linkType: hard
 
@@ -5004,6 +5056,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"source-map-generator@npm:0.8.0":
+  version: 0.8.0
+  resolution: "source-map-generator@npm:0.8.0"
+  checksum: 10c0/4cab61cd56c81c4ecd8f2249ea0d81e24210686de1d5814432e9ae03f153692d0e85f1f1edf87ae54f74a18dd4211ad966d721e034d6cacfb08a6f099b0b1329
+  languageName: node
+  linkType: hard
+
 "source-map-js@npm:^1.0.1, source-map-js@npm:^1.2.1":
   version: 1.2.1
   resolution: "source-map-js@npm:1.2.1"
@@ -5471,7 +5530,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^5.2.2, typescript@npm:^5.3.3":
+"typescript@npm:^5.2.2, typescript@npm:^5.3.3, typescript@npm:^5.8.3":
   version: 5.8.3
   resolution: "typescript@npm:5.8.3"
   bin:
@@ -5481,7 +5540,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@npm%3A^5.2.2#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A^5.3.3#optional!builtin<compat/typescript>":
+"typescript@patch:typescript@npm%3A^5.2.2#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A^5.3.3#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A^5.8.3#optional!builtin<compat/typescript>":
   version: 5.8.3
   resolution: "typescript@patch:typescript@npm%3A5.8.3#optional!builtin<compat/typescript>::version=5.8.3&hash=5786d5"
   bin:

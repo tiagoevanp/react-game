@@ -1,24 +1,25 @@
 {
-  "name": "@evanbrother/parser",
-  "private": true,
-  "version": "0.0.0",
-  "type": "module",
-  "scripts": {
-    "build": "bun run parser && tsc && vite build",
-    "parser": "npx peggy --plugin ../../node_modules/ts-pegjs/dist/tspegjs -o src/parser.ts grammar.pegjs",
-    "preview": "vite preview"
-  },
-  "dependencies": {
-    "ts-pegjs": "^4.2.1"
-  },
-  "devDependencies": {
-    "@evanbrother/eslint-config": "workspace: *",
-    "@typescript-eslint/eslint-plugin": "^7.2.0",
-    "@typescript-eslint/parser": "^7.2.0",
-    "eslint": "^8.57.0",
-    "prettier": "3.2.5",
-    "typescript": "^5.2.2",
-    "vite": "^5.2.0"
-  },
-  "prettier": "@evanbrother/prettier-config"
+    "name": "@evanbrother/parser",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "scripts": {
+        "build": "bun run parser && tsc && vite build",
+        "parser": "npx peggy --plugin ../../node_modules/ts-pegjs/dist/tspegjs -o src/parser.ts grammar.pegjs",
+        "preview": "vite preview"
+    },
+    "dependencies": {
+        "peggy": "^3.0.2",
+        "ts-pegjs": "^4.2.1"
+    },
+    "devDependencies": {
+        "@evanbrother/eslint-config": "workspace: *",
+        "@typescript-eslint/eslint-plugin": "^7.2.0",
+        "@typescript-eslint/parser": "^7.2.0",
+        "eslint": "^8.57.0",
+        "prettier": "3.2.5",
+        "typescript": "^5.2.2",
+        "vite": "^5.2.0"
+    },
+    "prettier": "@evanbrother/prettier-config"
 }

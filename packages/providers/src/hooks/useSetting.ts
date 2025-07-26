@@ -1,7 +1,7 @@
 import { useCallback, useContext } from 'react';
 import useLocalStorage from 'react-use-localstorage';
 
-import { useJsonParsedValue } from './useJsonParsedValue';
+import { useJsonParsedValue } from '.';
 import { SettingsContext, SettingsContextType } from '../SettingsProvider';
 
 export const useSetting = <T extends keyof SettingsContextType['settings']>(

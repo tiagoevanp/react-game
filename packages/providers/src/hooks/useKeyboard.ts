@@ -1,8 +1,8 @@
-import { useSetting } from '@evanbrother/providers';
-import { useEffect } from 'react';
-import { useUiControl } from './useUiControl';
+import { ReactElement, useEffect } from 'react';
+import { useSetting } from './useSetting';
+import { uiControlReducerAction } from '../reducers/uiControlReducer';
 
-export const useKeyboard = ({ goUp, goDown, goLeft, goRight, select }: ReturnType<typeof useUiControl>['actions']) => {
+export const useKeyboard = (columns: ReactElement[][], dispatch: React.Dispatch<uiControlReducerAction>) => {
     const [keyMap] = useSetting('keyMap');
 
     useEffect(() => {
@@ -21,15 +21,15 @@ export const useKeyboard = ({ goUp, goDown, goLeft, goRight, select }: ReturnTyp
 
             switch (action) {
                 case 'up':
-                    return goUp();
+                    return dispatch({ type: 'GO_UP', columns });
                 case 'down':
-                    return goDown();
+                    return dispatch({ type: 'GO_DOWN', columns });
                 case 'left':
-                    return goLeft();
+                    return dispatch({ type: 'GO_LEFT', columns });
                 case 'right':
-                    return goRight();
+                    return dispatch({ type: 'GO_RIGHT', columns });
                 case 'select':
-                    return select();
+                    return dispatch({ type: 'SELECT', columns });
             }
         };
 

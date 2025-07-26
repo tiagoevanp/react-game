@@ -31,11 +31,6 @@ export const Button = ({ children, action, disabled, selected }: ButtonProps) =>
     return (
         <button
             className="theme-smooth-transition"
-            onMouseLeave={(e) => {
-                e.currentTarget.style.backgroundColor = theme.application.button.backgroundColor;
-                e.currentTarget.style.borderColor = theme.application.button.borderColor;
-                e.currentTarget.style.color = theme.application.button.color;
-            }}
             css={style}
             style={buttonTheme}
             type="button"

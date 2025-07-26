@@ -8,6 +8,7 @@
         "preview": "vite preview"
     },
     "dependencies": {
+        "@emotion/react": "^11.11.4",
         "@evanbrother/parser": "workspace: *",
         "@evanbrother/ui": "workspace: *",
         "react": "^18.2.0",
@@ -15,11 +16,13 @@
         "react-use-localstorage": "^3.5.3"
     },
     "devDependencies": {
+        "@emotion/eslint-plugin": "^11.11.0",
         "@evanbrother/eslint-config": "workspace: *",
         "@evanbrother/prettier-config": "workspace: *",
         "@types/react": "^18.2.66",
         "@types/react-dom": "^18.2.22",
         "@vitejs/plugin-react": "^4.2.1",
+        "eslint": "^8.50.0",
         "typescript": "^5.2.2",
         "vite": "^5.2.0"
     },

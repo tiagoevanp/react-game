@@ -4,7 +4,9 @@
   "type": "commonjs",
   "main": "index.js",
   "dependencies": {
+    "postcss": "^8.5.6",
     "postcss-styled-syntax": "^0.6.4",
+    "prettier": "^3.6.2",
     "stylelint": "^16.6.0",
     "stylelint-config-standard": "^36.0.0",
     "stylelint-prettier": "^5.0.0"
