@@ -4,10 +4,11 @@
   "description": "A React-based text RPG game",
   "private": true,
   "scripts": {
-    "dev": "bun run --filter='@evanbrother/main' dev",
+    "dev": "bun run  --elide-lines 0 --filter='@evanbrother/main' dev",
     "build-parser": "bun run --filter='@evanbrother/parser' parser",
     "lint": "bun run --filter='*' lint",
-    "test": "bun run --filter='*' test"
+    "test": "bun run --filter='*' test",
+    "install": "bun install"
   },
   "workspaces": [
     "packages/*"
