@@ -1,5 +1,7 @@
 {
-  "name": "bun-test",
+  "name": "react-game",
+  "version": "0.0.0",
+  "description": "A React-based text RPG game",
   "private": true,
   "scripts": {
     "dev": "bun run --filter='@evanbrother/main' dev",
@@ -9,5 +11,9 @@
   },
   "workspaces": [
     "packages/*"
-  ]
+  ],
+  "volta": {
+    "node": "22.17.1",
+    "yarn": "4.9.2"
+  }
 }

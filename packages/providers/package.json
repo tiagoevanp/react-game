@@ -8,8 +8,8 @@
         "preview": "vite preview"
     },
     "dependencies": {
-        "@evanbrother/ui": "workspace: *",
         "@evanbrother/parser": "workspace: *",
+        "@evanbrother/ui": "workspace: *",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "react-use-localstorage": "^3.5.3"
