@@ -2,8 +2,21 @@ import { ReactElement, useEffect } from 'react';
 import { useSetting } from './useSetting';
 import { uiControlReducerAction } from '../reducers/uiControlReducer';
 
-export const useKeyboard = (columns: ReactElement[][], dispatch: React.Dispatch<uiControlReducerAction>) => {
+const normalizeColumns = (columns: (ReactElement | null)[][]) => {
+    return columns.map((column) => {
+        for (let i = 0; i < columns.length; i++) {
+            if (column[i] === undefined) {
+                column[i] = null;
+            }
+        }
+
+        return column;
+    });
+};
+
+export const useKeyboard = (columns: (ReactElement | null)[][], dispatch: React.Dispatch<uiControlReducerAction>) => {
     const [keyMap] = useSetting('keyMap');
+    const normalizedColumns = normalizeColumns(columns);
 
     useEffect(() => {
         const callback = (e: KeyboardEvent) => {
@@ -21,15 +34,15 @@ export const useKeyboard = (columns: ReactElement[][], dispatch: React.Dispatch<
 
             switch (action) {
                 case 'up':
-                    return dispatch({ type: 'GO_UP', columns });
+                    return dispatch({ type: 'GO_UP', columns: normalizedColumns });
                 case 'down':
-                    return dispatch({ type: 'GO_DOWN', columns });
+                    return dispatch({ type: 'GO_DOWN', columns: normalizedColumns });
                 case 'left':
-                    return dispatch({ type: 'GO_LEFT', columns });
+                    return dispatch({ type: 'GO_LEFT', columns: normalizedColumns });
                 case 'right':
-                    return dispatch({ type: 'GO_RIGHT', columns });
+                    return dispatch({ type: 'GO_RIGHT', columns: normalizedColumns });
                 case 'select':
-                    return dispatch({ type: 'SELECT', columns });
+                    return dispatch({ type: 'SELECT', columns: normalizedColumns });
             }
         };
 

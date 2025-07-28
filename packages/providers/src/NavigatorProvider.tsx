@@ -16,7 +16,7 @@ const defaultSettingsValues: NavigatorContextType = {
 
 export const NavigatorContext = createContext<NavigatorContextType>(defaultSettingsValues);
 
-export const NavigatorProvider = ({ children, columns }: PropsWithChildren<{ columns: ReactElement[][] }>) => {
+export const NavigatorProvider = ({ children, columns }: PropsWithChildren<{ columns: (ReactElement | null)[][] }>) => {
     const [state, dispatch] = useReducer(uiControlReducer, { row: -1, column: -1 });
 
     useKeyboard(columns, dispatch);

@@ -1,113 +1,153 @@
 import { NavigatorProps } from '@evanbrother/ui';
 
-const getColumnLength = (columns: NavigatorProps['columns'], selectedColumnIdx: number) => {
-    return (
-        columns.find((_column, colIdx) => {
-            return colIdx === selectedColumnIdx;
-        })?.length || 0
-    );
+type uiControlDirectionProps = {
+    row: number;
+    column: number;
+    columns: NavigatorProps['columns'];
 };
 
-const getFirstColumnIndexOfRow = (columns: NavigatorProps['columns'], selected: { row: number; column: number }) => {
-    return columns.findIndex((column) => column[selected.row] !== undefined);
+const getLastMatrixIndexes = (columns: NavigatorProps['columns']) => {
+    return { column: columns.length - 1, row: columns[0].length - 1 };
 };
 
-const getLastColumnIndexOfRow = (columns: NavigatorProps['columns'], selected: { row: number; column: number }) => {
-    return columns.findLastIndex((column) => column[selected.row] !== undefined);
+const getFirstColumnIndexOfNextRow = ({ row, columns }: Omit<uiControlDirectionProps, 'column'>) => {
+    return columns.findIndex((column) => column[row + 1] !== undefined);
 };
 
-const getNextColumnIndex = (columns: NavigatorProps['columns'], selected: { row: number; column: number }): number => {
-    const firstColumnIndexOfRow = getFirstColumnIndexOfRow(columns, selected);
+const getLastColumnIndexOfPreviousRow = ({ row, columns }: Omit<uiControlDirectionProps, 'column'>) => {
+    return columns.findLastIndex((column) => column[row - 1] !== undefined);
+};
 
-    if (columns[selected.column + 1] === undefined) {
-        return firstColumnIndexOfRow;
-    }
+const getNextItem = ({ column, row, columns }: uiControlDirectionProps) => {
+    const firstColumnIndexOfNextRow = getFirstColumnIndexOfNextRow({ row, columns });
 
-    if (columns[selected.column + 1][selected.row] !== undefined) {
-        if (columns[selected.column + 1][selected.row].props.disabled) {
-            return getNextColumnIndex(columns, { row: selected.row, column: selected.column + 1 });
+    if (columns[column + 1] === undefined) {
+        if (firstColumnIndexOfNextRow === -1) {
+            return getNextItem({ row: 0, column: -1, columns });
         }
-        return selected.column + 1;
-    }
 
-    if (columns[selected.column + 1][selected.row] === undefined) {
-        if (columns[firstColumnIndexOfRow][selected.row].props.disabled) {
-            return getNextColumnIndex(columns, { row: selected.row, column: firstColumnIndexOfRow });
+        if (
+            columns[firstColumnIndexOfNextRow][row + 1]?.props.disabled ||
+            columns[firstColumnIndexOfNextRow][row + 1] === null
+        ) {
+            return getNextItem({ row: row + 1, column: firstColumnIndexOfNextRow, columns });
         }
+
+        return { row: row + 1, column: firstColumnIndexOfNextRow };
     }
 
-    return firstColumnIndexOfRow;
+    if (columns[column + 1][row] === null) {
+        return getNextItem({ row, column: column + 1, columns });
+    }
+
+    if (columns[column + 1][row]?.props.disabled) {
+        return getNextItem({ row, column: column + 1, columns });
+    }
+
+    return { row, column: column + 1 };
 };
 
-const getPreviousColumnIndex = (
-    columns: NavigatorProps['columns'],
-    selected: { row: number; column: number }
-): number => {
-    const lastColumnIndexOfRow = getLastColumnIndexOfRow(columns, selected);
+const getPreviousItem = ({ column, row, columns }: uiControlDirectionProps) => {
+    const lastColumnIndexOfPreviousRow = getLastColumnIndexOfPreviousRow({ row, columns });
 
-    if (columns[selected.column - 1] === undefined) {
-        return lastColumnIndexOfRow;
-    }
+    if (columns[column - 1] === undefined) {
+        const lastMatrixIndexes = getLastMatrixIndexes(columns);
 
-    if (columns[selected.column - 1][selected.row] !== undefined) {
-        if (columns[selected.column - 1][selected.row].props.disabled) {
-            return getPreviousColumnIndex(columns, { row: selected.row, column: selected.column - 1 });
+        if (lastColumnIndexOfPreviousRow === -1) {
+            return getPreviousItem({ row: lastMatrixIndexes.row, column: lastMatrixIndexes.column + 1, columns });
         }
-        return selected.column - 1;
-    }
 
-    if (columns[selected.column - 1][selected.row] === undefined) {
-        if (columns[lastColumnIndexOfRow][selected.row].props.disabled) {
-            return getPreviousColumnIndex(columns, { row: selected.row, column: lastColumnIndexOfRow });
+        if (
+            columns[lastColumnIndexOfPreviousRow][row - 1]?.props.disabled ||
+            columns[lastColumnIndexOfPreviousRow][row - 1] === null
+        ) {
+            return getPreviousItem({ row: row - 1, column: lastColumnIndexOfPreviousRow, columns });
         }
+
+        return { row: row - 1, column: lastColumnIndexOfPreviousRow };
     }
 
-    return lastColumnIndexOfRow;
+    if (columns[column - 1][row] === null) {
+        return getPreviousItem({ row, column: column - 1, columns });
+    }
+
+    if (columns[column - 1][row]?.props.disabled) {
+        return getPreviousItem({ row, column: column - 1, columns });
+    }
+
+    return { row, column: column - 1 };
 };
 
-const goUp = (column: number, row: number, columns: NavigatorProps['columns']) => {
+const goUp = ({ column, row, columns }: uiControlDirectionProps) => {
     if (column === -1 && row === -1) {
         return { row: 0, column: 0 };
     }
 
-    const previousIndex = row - 1;
-    const hasPrevious = previousIndex >= 0;
-    const lastRowIndex = getColumnLength(columns, column) - 1;
+    const previousRowIndex = row - 1;
+    const hasPreviousRow = previousRowIndex >= 0;
+    const lastColumnIndex = columns.length - 1;
+    const lastRowIndex = columns[lastColumnIndex].length - 1;
 
-    if (hasPrevious && columns[column][previousIndex].props.disabled) {
-        return goUp(column, previousIndex, columns);
+    if (hasPreviousRow) {
+        if (columns[column][previousRowIndex]?.props.disabled || columns[column][previousRowIndex] === null) {
+            return goUp({ column, row: previousRowIndex, columns });
+        }
+
+        return { row: previousRowIndex, column };
     }
 
-    if (!hasPrevious && columns[column][lastRowIndex].props.disabled) {
-        return goUp(column, lastRowIndex, columns);
+    if (!hasPreviousRow && columns[column - 1] === undefined) {
+        if (columns[lastColumnIndex][lastRowIndex]?.props.disabled) {
+            return goUp({ column: lastColumnIndex, row: lastRowIndex, columns });
+        }
+
+        return { row: lastRowIndex, column: lastColumnIndex };
     }
 
-    return {
-        row: hasPrevious ? previousIndex : lastRowIndex,
-        column: column,
-    };
+    return goUp({ column: column - 1, row: lastRowIndex + 1, columns });
 };
 
-const goDown = (column: number, row: number, columns: NavigatorProps['columns']) => {
+const goDown = ({ column, row, columns }: uiControlDirectionProps) => {
     if (column === -1 && row === -1) {
         return { row: 0, column: 0 };
     }
 
-    const nextIndex = row + 1;
-    const hasNext = nextIndex <= getColumnLength(columns, column) - 1;
+    const nextRowIndex = row + 1;
+    const hasNextRow = nextRowIndex < columns[column].length;
 
-    if (hasNext && columns[column][nextIndex].props.disabled) {
-        return goDown(column, nextIndex, columns);
+    if (hasNextRow) {
+        if (columns[column][nextRowIndex]?.props.disabled || columns[column][nextRowIndex] === null) {
+            return goDown({ column, row: nextRowIndex, columns });
+        }
+
+        return { row: nextRowIndex, column };
     }
 
-    if (!hasNext && columns[column][0].props.disabled) {
-        return goDown(column, 0, columns);
+    if (!hasNextRow && columns[column + 1] === undefined) {
+        if (columns[0][0]?.props.disabled) {
+            return goDown({ column: 0, row: 0, columns });
+        }
+
+        return { row: 0, column: 0 };
     }
 
-    return {
-        row: hasNext ? nextIndex : 0,
-        column: column,
-    };
+    return goDown({ column: column + 1, row: -1, columns });
+};
+
+const goLeft = ({ column, row, columns }: uiControlDirectionProps) => {
+    if (column === -1 && row === -1) {
+        return { row: 0, column: 0 };
+    }
+
+    return getPreviousItem({ row, column, columns });
+};
+
+const goRight = ({ column, row, columns }: uiControlDirectionProps) => {
+    if (column === -1 && row === -1) {
+        return { row: 0, column: 0 };
+    }
+
+    return getNextItem({ row, column, columns });
 };
 
 type uiControlReducerState = {
@@ -127,37 +167,21 @@ export type uiControlReducerAction =
 export const uiControlReducer = (state: uiControlReducerState, action: uiControlReducerAction) => {
     switch (action.type) {
         case 'GO_UP':
-            return goUp(state.column, state.row, action.columns);
+            return goUp({ ...state, columns: action.columns });
         case 'GO_DOWN':
-            return goDown(state.column, state.row, action.columns);
+            return goDown({ ...state, columns: action.columns });
         case 'GO_LEFT':
-            if (state.column === -1 && state.row === -1) {
-                return { row: 0, column: 0 };
-            }
-
-            return {
-                row: state.row,
-                column: getPreviousColumnIndex(action.columns, state),
-            };
+            return goLeft({ ...state, columns: action.columns });
         case 'GO_RIGHT':
-            if (state.column === -1 && state.row === -1) {
-                return { row: 0, column: 0 };
-            }
-
-            return {
-                row: state.row,
-                column: getNextColumnIndex(action.columns, state),
-            };
+            return goRight({ ...state, columns: action.columns });
         case 'SELECT':
-            if (state.column === -1 || state.row === -1) {
-                return state;
+            if (state.column !== -1 && state.row !== -1) {
+                action.columns[state.column][state.row]?.props.action();
             }
 
-            action.columns[state.column][state.row].props.action();
             return state;
         case 'CLEAR':
             return { row: -1, column: -1 };
-
         default:
             return state;
     }

@@ -28,11 +28,13 @@ export const Navigator = ({ columns }: NavigatorProps) => {
         <div css={navigatorStyle}>
             {columns.map((column, columnIdx) => (
                 <div key={columnIdx} css={columnStyle}>
-                    {column.map((Component, rowIdx) =>
-                        cloneElement(Component, {
-                            key: rowIdx,
-                            selected: rowIdx === selectedRow && columnIdx === selectedColumn,
-                        })
+                    {column.map(
+                        (Component, rowIdx) =>
+                            Component &&
+                            cloneElement(Component, {
+                                key: rowIdx,
+                                selected: rowIdx === selectedRow && columnIdx === selectedColumn,
+                            })
                     )}
                 </div>
             ))}

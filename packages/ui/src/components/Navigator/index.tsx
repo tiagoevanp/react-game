@@ -3,7 +3,7 @@ import { ReactElement } from 'react';
 import { Navigator } from './Navigator';
 
 export type NavigatorProps = {
-    columns: ReactElement[][];
+    columns: (ReactElement | null)[][];
 };
 
 const NavigatorHOC = ({ columns }: NavigatorProps) => {
