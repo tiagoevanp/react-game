@@ -25,10 +25,7 @@ export const useTypewriterAnimation = (
         }
 
         const tagIndex = text.current.lastIndexOf(
-            tag.current.slice(0, 1) +
-                '/' +
-                tag.current.slice(1, tag.current.indexOf(' ')) +
-                ']'
+            tag.current.slice(0, 1) + '/' + tag.current.slice(1, tag.current.indexOf(' ')) + ']'
         );
 
         return tagIndex;
@@ -39,10 +36,7 @@ export const useTypewriterAnimation = (
         const character = originalText.substring(cursor, cursor + 1);
 
         if (index !== -1) {
-            text.current =
-                text.current.slice(0, index) +
-                character +
-                text.current.slice(index);
+            text.current = text.current.slice(0, index) + character + text.current.slice(index);
         } else {
             text.current = text.current + character;
         }
@@ -56,23 +50,12 @@ export const useTypewriterAnimation = (
         if (originalText[cursor + 1] !== '/') {
             const index = findEndTag();
 
-            tag.current = originalText.substring(
-                cursor,
-                cursor + originalText.substring(cursor).indexOf(']') + 1
-            );
+            tag.current = originalText.substring(cursor, cursor + originalText.substring(cursor).indexOf(']') + 1);
 
-            const endTag =
-                tag.current.slice(0, 1) +
-                '/' +
-                tag.current.slice(1, tag.current.indexOf(' ')) +
-                ']';
+            const endTag = tag.current.slice(0, 1) + '/' + tag.current.slice(1, tag.current.indexOf(' ')) + ']';
 
             if (index !== -1) {
-                text.current =
-                    text.current.slice(0, index) +
-                    tag.current +
-                    endTag +
-                    text.current.slice(index);
+                text.current = text.current.slice(0, index) + tag.current + endTag + text.current.slice(index);
             } else {
                 text.current = text.current + tag.current + endTag;
             }
@@ -106,15 +89,7 @@ export const useTypewriterAnimation = (
         );
 
         return () => clearTimeout(id);
-    }, [
-        cursor,
-        humanize,
-        humanizedTime,
-        insertTag,
-        originalText,
-        typewriterTime,
-        updateText,
-    ]);
+    }, [cursor, humanize, humanizedTime, insertTag, originalText, typewriterTime, updateText]);
 
     useEffect(() => {
         setTime(time);

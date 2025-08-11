@@ -1,4 +1,4 @@
-import { Application, Button, Navigator, Text } from '@evanbrother/ui';
+import { Application, Button, Navigator, Text, Typewriter } from '@evanbrother/ui';
 
 import { ChangeThemeButton } from './ChangeThemeButton';
 
@@ -9,6 +9,9 @@ const App = () => {
             <Text align="center" scale="h1">
                 REACT GAME
             </Text>
+            <Typewriter humanize time={32} scale="h2">
+                This is a simple game to test the UI components.
+            </Typewriter>
             <Navigator
                 columns={[
                     [
